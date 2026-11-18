@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mu Shan (Misha) Rau — Product & Project Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* ============ 配色：改这里就能换整站颜色 ============ */
+:root{
+  --pistachio:#BFE3C0; --rose:#F7C5D2; --lavender:#D6CBF2;
+  --lemon:#F6E7A1;     --peach:#F9CFAE; --sky:#BADDEE;
+  --ink:#2B2442; --ink-soft:#5E5677; --note-ink:#2B2442;
+  --bg:#FBFAFE; --surface:#FFFFFF; --line:#E9E5F3; --dot:rgba(43,36,66,.13);
+  --shadow:0 14px 22px -14px rgba(43,36,66,.45);
+  --display:"Bricolage Grotesque","Noto Sans SC",system-ui,sans-serif;
+  --body:"Instrument Sans","Noto Sans SC",system-ui,sans-serif;
+  --hand:"Caveat","Bradley Hand",cursive;
+  --tint:var(--bg);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --pistachio:#A9D6AC; --rose:#EDB0C1; --lavender:#C3B5EC;
+    --lemon:#E8D684; --peach:#EDBB95; --sky:#9FCDE3;
+    --ink:#F2EEFB; --ink-soft:#B7AFCC;
+    --bg:#1D1929; --surface:#262135; --line:#3A3350; --dot:rgba(242,238,251,.10);
+    --shadow:0 14px 24px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:80px}
+body{background-color:color-mix(in srgb,var(--tint) 16%,var(--bg));transition:background-color .9s ease;
+  background-image:radial-gradient(var(--dot) 1.2px,transparent 1.6px);background-size:24px 24px;
+  color:var(--ink);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--lavender);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.hand{font-family:var(--hand);font-weight:600}
+
+/* 便利贴：整站的核心元素 */
+.note{background:var(--c);color:var(--note-ink);border-radius:5px;box-shadow:var(--shadow);position:relative}
+.tape::before{content:"";position:absolute;top:-12px;left:50%;width:84px;height:24px;margin-left:-42px;
+  background:rgba(255,255,255,.55);rotate:-3deg;border-radius:2px;backdrop-filter:blur(2px)}
+
+.progress{position:fixed;top:0;left:0;right:0;height:5px;z-index:50;transform-origin:left;transform:scaleX(var(--p,0));
+  background:linear-gradient(90deg,var(--rose) 0 16.6%,var(--peach) 0 33.3%,var(--lemon) 0 50%,var(--pistachio) 0 66.6%,var(--sky) 0 83.3%,var(--lavender) 0)}
+
+nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 72%,transparent)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:14px}
+.logo{font:800 19px var(--display);text-decoration:none;letter-spacing:-.02em}
+nav ul{display:flex;gap:24px;list-style:none}
+nav ul a{text-decoration:none;color:var(--ink-soft);font-weight:500}
+nav ul a:hover{color:var(--ink)}
+
+/* hero：名字和介绍分开 */
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:40px 0 70px}
+.name{display:flex;flex-wrap:wrap;gap:.14em .38em;font:800 clamp(58px,11.5vw,156px)/1 var(--display);letter-spacing:-.02em;perspective:800px}
+.name .w{display:flex;gap:.05em}
+.tile{display:inline-block;transform:translateY(calc(var(--s,0)*var(--k,0)*-1px));min-width:.72em;padding:.04em .07em .08em;text-align:center;background:var(--c);color:var(--note-ink);
+  border-radius:.07em;box-shadow:var(--shadow);rotate:var(--r);cursor:default;transition:rotate .3s,translate .3s cubic-bezier(.3,1.6,.5,1)}
+.tile:hover{rotate:0deg;translate:0 -10%}
+.intro{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:30px;margin-top:48px}
+.intro p{font:600 clamp(22px,2.6vw,30px)/1.3 var(--display);max-width:21em;letter-spacing:-.01em}
+.intro .meta{display:block;margin-top:8px;font:500 16px var(--body);color:var(--ink-soft)}
+.flow{display:flex;align-items:center;gap:6px}
+.flow .note{padding:10px 18px 12px;font:600 28px/1 var(--hand)}
+.flow .note:nth-of-type(1){rotate:-4deg}.flow .note:nth-of-type(2){rotate:3deg}.flow .note:nth-of-type(3){rotate:-2deg}
+.flow svg{width:56px;height:28px;fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* keyword band */
+.band{padding:30px 0;overflow:hidden;border-block:1.5px solid var(--line);background:var(--bg)}
+.band-track{display:flex;width:max-content;transform:translateX(calc(var(--m,0)*-1px))}
+.band span{font:800 clamp(36px,6vw,74px)/1 var(--display);letter-spacing:-.03em;padding-right:30px;display:flex;align-items:center;gap:30px;white-space:nowrap}
+.band i{display:inline-block;width:.42em;height:.42em;border-radius:3px;background:var(--c);rotate:12deg}
+
+section{padding:100px 0}
+h2{font:800 clamp(34px,4.4vw,54px)/1.05 var(--display);letter-spacing:-.03em;margin-bottom:14px}
+.lead{color:var(--ink-soft);max-width:36em;margin-bottom:40px}
+
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filters button{font:500 15px var(--body);padding:8px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* projects：贴在板上的便利贴 */
+.board{display:grid;grid-template-columns:repeat(2,1fr);gap:54px 40px;list-style:none}
+.board li[hidden]{display:none}
+.pcard{display:block;width:100%;border:0;text-align:left;cursor:pointer;font:inherit;padding:16px 16px 26px;rotate:var(--r,0deg);
+  transition:rotate .35s ease,translate .35s cubic-bezier(.3,1.5,.5,1)}
+.pcard:hover,.pcard:focus-visible{rotate:0deg;translate:0 -6px}
+.pcard .pic{aspect-ratio:16/10;border-radius:3px;overflow:hidden;background:color-mix(in srgb,var(--c) 55%,#fff)}
+.pcard .pic img{width:100%;height:100%;object-fit:cover}
+.pcard .pic .ph{height:100%;display:flex;align-items:center;justify-content:center;font:600 46px var(--hand)}
+.pcard .tags{display:block;margin:18px 6px 4px;font-size:14px;font-weight:600;opacity:.75}
+.pcard h3{margin:0 6px;font:600 clamp(23px,2.4vw,29px)/1.15 var(--display);letter-spacing:-.02em}
+.pcard p{margin:8px 6px 0;font-size:16px}
+.pcard .more{display:inline-block;margin:14px 6px 0;font:600 22px var(--hand)}
+
+/* research */
+.papers{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.paper{padding:34px}
+.paper:nth-child(1){rotate:-1deg}.paper:nth-child(2){rotate:1.2deg}
+.paper .venue{font-size:14px;font-weight:600}
+.paper h3{font:600 23px/1.25 var(--display);margin:10px 0 12px}
+.paper p{font-size:15.5px}
+.paper a{display:inline-block;margin-top:16px;font-weight:600;text-underline-offset:4px}
+.now{margin-top:34px;padding:22px 28px;border-radius:12px;border:1.5px dashed var(--ink-soft);color:var(--ink-soft);background:var(--bg)}
+
+/* about */
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
+.about p+p{margin-top:16px}
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:start}
+.skill{padding:20px 20px 22px;rotate:var(--r)}
+.skill:first-child{grid-column:1/-1}
+.skill h3{font:600 26px/1 var(--hand);margin-bottom:6px}
+.skill p{font-size:15px}
+.side{margin-top:34px}
+.side h3{font:600 18px var(--display);margin-bottom:4px}
+.side-row{display:flex;gap:16px;margin-top:14px}
+.side-row button{width:92px;padding:6px 6px 18px;border:0;background:#fff;box-shadow:var(--shadow);cursor:pointer;border-radius:2px;transition:rotate .3s}
+.side-row button:nth-child(1){rotate:-5deg}.side-row button:nth-child(2){rotate:3deg}.side-row button:nth-child(3){rotate:-2deg}
+.side-row button:hover{rotate:0deg}
+.side-row img{width:100%;aspect-ratio:1;object-fit:cover}
+
+/* timeline */
+.tl{list-style:none;position:relative;margin-left:8px}
+.tl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px;background:var(--lavender);transform-origin:top;transform:scaleY(var(--tp,1))}
+.tl li{position:relative;padding:0 0 34px 34px}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:17px;height:17px;border-radius:4px;rotate:12deg;background:var(--c,var(--peach))}
+.tl .when{font-size:14px;color:var(--ink-soft)}
+.tl h3{font:600 21px var(--display)}
+.tl p{color:var(--ink-soft);font-size:16px;max-width:40em}
+
+.contact{text-align:center;padding:100px 28px;margin:50px 0 50px;rotate:-.6deg}
+.contact h2{font-size:clamp(38px,6vw,76px)}
+.contact a.mail{display:inline-block;margin-top:22px;font:600 clamp(19px,2.8vw,30px) var(--display);text-decoration-thickness:3px;text-underline-offset:6px;word-break:break-all}
+.links{display:flex;gap:24px;justify-content:center;margin-top:24px;font-weight:600}
+footer{text-align:center;color:var(--ink-soft);font-size:14px;padding:0 0 40px}
+
+
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
+
+/* ============ 小动画：绘画 / 音乐 / 科技 ============ */
+.vig{padding:30px 0 10px}
+.vig .wrap{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.vig .cap{font:600 clamp(26px,3vw,34px)/1.2 var(--hand);max-width:14em}
+.vig .cap small{display:block;font:500 15px var(--body);color:var(--ink-soft);margin-top:6px}
+/* 绘画：随滚动画出的灯泡 */
+.doodle{width:min(260px,60vw);overflow:visible}
+.doodle path{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--dp,1))}
+.doodle .bulb{fill:var(--lemon);fill-opacity:0;transition:fill-opacity .6s}
+.doodle .rays{opacity:0;transition:opacity .5s;stroke:var(--peach);stroke-width:5}
+.doodle.lit .bulb{fill-opacity:1}.doodle.lit .rays{opacity:1}
+/* 音乐：跳动的音频条 + 飘起的音符 */
+.eq{position:relative;display:flex;align-items:flex-end;gap:6px;height:120px}
+.eq span{width:12px;height:100%;border-radius:6px;background:var(--c);transform-origin:bottom;transform:scaleY(.25)}
+.eq.in span{animation:eq 1.1s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes eq{0%{transform:scaleY(.18)}50%{transform:scaleY(var(--h))}100%{transform:scaleY(.35)}}
+.eq b{position:absolute;bottom:60%;font:600 30px var(--hand);opacity:0}
+.eq.in b{animation:float 3.2s ease-in infinite;animation-delay:var(--d)}
+@keyframes float{0%{opacity:0;transform:translateY(0) rotate(-10deg)}20%{opacity:1}100%{opacity:0;transform:translateY(-90px) rotate(14deg)}}
+/* 科技：会自己打字的终端便利贴 */
+.term{width:min(440px,100%);padding:20px 22px 24px;rotate:1.4deg;font:500 15px/1.7 ui-monospace,"SF Mono",Menlo,Consolas,monospace;min-height:220px}
+.term .dots{display:flex;gap:7px;margin-bottom:12px}.term .dots i{width:11px;height:11px;border-radius:50%;background:rgba(43,36,66,.25)}
+.term .ok{color:#2F7A43}
+.term .cur{display:inline-block;width:8px;height:1.1em;background:var(--note-ink);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ============ 项目详情：便利贴展开成整页 ============ */
+#morph{position:fixed;inset:0;z-index:90;pointer-events:none}
+.case{position:fixed;inset:0;z-index:95;overflow-y:auto;overscroll-behavior:contain;background-color:var(--bg);
+  background-image:radial-gradient(var(--dot) 1.2px,transparent 1.6px);background-size:24px 24px}
+.case[hidden]{display:none}
+.case-bar{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:16px 28px;pointer-events:none}
+.case-bar>*{pointer-events:auto}
+.back{display:inline-flex;align-items:center;gap:8px;padding:10px 18px 10px 14px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font:600 15px var(--body);cursor:pointer;box-shadow:var(--shadow)}
+.back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.count{font:600 24px var(--hand);background:var(--bg);padding:2px 12px;border-radius:8px}
+.case-head{background:var(--c);color:var(--note-ink);margin-top:-74px;padding:120px 0 70px}
+.case-head .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.case-head .tags{font-size:15px;font-weight:600;opacity:.75}
+.case-head h1{font:800 clamp(40px,6vw,80px)/1 var(--display);letter-spacing:-.035em;margin:10px 0 18px}
+.case-head p.sum{font-size:20px;max-width:28em}
+.facts{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.fact{background:rgba(255,255,255,.62);padding:10px 16px 12px;border-radius:4px;box-shadow:var(--shadow)}
+.fact:nth-child(odd){rotate:-1.5deg}.fact:nth-child(even){rotate:1.5deg}
+.fact dt{font-size:12.5px;opacity:.7}.fact dd{font-weight:600;font-size:15px}
+.polaroid{background:#fff;padding:12px 12px 44px;box-shadow:var(--shadow);rotate:3deg;border-radius:2px;position:relative}
+.polaroid img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.polaroid .ph{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 40%,#fff);color:#5E5677;font-size:15px}
+.case-body{padding:40px 0 30px}
+.case-sec{display:grid;grid-template-columns:250px 1fr;gap:40px;padding:38px 0;border-top:1.5px dashed var(--line)}
+.case-sec:first-child{border-top:0}
+.case-sec h2{font:600 clamp(32px,3.4vw,42px)/1.05 var(--hand);margin:0}
+.case-sec p{font-size:18.5px;line-height:1.7;max-width:36em}
+.case-links{display:flex;gap:12px;flex-wrap:wrap;padding:10px 0 50px}
+.case-links a{padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600}
+.next{display:block;width:100%;max-width:520px;margin:20px auto 90px;padding:34px 34px 38px;border:0;text-align:left;cursor:pointer;rotate:-1.2deg;transition:rotate .35s,translate .35s cubic-bezier(.3,1.5,.5,1)}
+.next:hover{rotate:0deg;translate:0 -6px}
+.next span{font:600 24px var(--hand)}
+.next strong{display:block;font:800 clamp(28px,3.4vw,40px)/1.1 var(--display);letter-spacing:-.02em;margin-top:4px}
+
+/* tech chips + embed */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 6px 0}
+.chips span{font-size:13px;font-weight:600;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.6);color:var(--note-ink)}
+.case-head .chips{margin:18px 0 0}
+.embed{aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--c) 40%,var(--surface));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.embed iframe{width:100%;height:100%;border:0;background:#fff}
+.embed .load{padding:12px 22px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font:600 15px var(--body);cursor:pointer}
+.embed-note{font-size:15px!important;color:var(--ink-soft);margin-top:12px}
+
+/* ============ 动画（系统设置“减少动态效果”时自动关闭） ============ */
+@media (prefers-reduced-motion:no-preference){
+  .tile{animation:flip .9s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:calc(var(--i)*.07s + .1s)}
+  @keyframes flip{from{opacity:0;transform:rotateX(-100deg) translateY(-40%)}}
+  .wd{display:inline-block;animation:wordIn 1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--w)*.045s + .75s)}
+  @keyframes wordIn{from{opacity:0;transform:translateY(.55em);filter:blur(8px)}}
+  .intro .meta{animation:soft .8s ease backwards;animation-delay:1.3s}
+  @keyframes soft{from{opacity:0;filter:blur(6px)}}
+  .flow .note{animation:soft .7s ease backwards}
+  .flow .note:nth-of-type(1){animation-delay:1.45s}.flow .note:nth-of-type(2){animation-delay:1.75s}.flow .note:nth-of-type(3){animation-delay:2.05s}
+  .flow path{stroke-dasharray:80;stroke-dashoffset:80;animation:draw .5s ease forwards}
+  .flow svg:nth-of-type(1) path{animation-delay:1.55s}.flow svg:nth-of-type(2) path{animation-delay:1.85s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .js .rv{opacity:0;transform:translateY(24px);filter:blur(5px);transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1),filter .55s ease;transition-delay:var(--d,0s)}
+  .js .stick{opacity:0;transform:scale(1.08) rotate(5deg) translateY(22px);transition:opacity .4s ease,transform .6s cubic-bezier(.3,1.35,.5,1);transition-delay:var(--d,0s)}
+  .js .rv.in,.js .stick.in{opacity:1;transform:none;filter:none}
+
+  .case.open .ci{animation:wordIn .9s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:var(--d,0s)}
+  .case .polaroid.ci{animation-name:drop}
+  @keyframes drop{from{opacity:0;transform:translateY(-60px) rotate(-8deg)}}
+}
+@media (prefers-reduced-motion:reduce){.doodle path{stroke-dashoffset:0}}
+
+@media (max-width:860px){
+  nav ul{gap:14px;font-size:14px}
+  nav ul li:nth-child(4){display:none}
+  .board,.papers{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .about{grid-template-columns:1fr;gap:36px}
+  .case-head .wrap{grid-template-columns:1fr}
+  .case-sec{grid-template-columns:1fr;gap:10px}
+  .case-bar{padding:12px 16px}
+}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.flow .note{font-size:23px;padding:8px 12px 10px}.flow svg{width:34px}.eq span{width:8px}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top">Misha Rau</a>
+  <ul><li><a href="#work">Projects</a></li><li><a href="#research">Research</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+</div></nav>
+
+<div class="wrap" id="top">
+  <header class="hero">
+    <h1 class="name" id="name" aria-label="Mu Shan Rau"></h1>
+    <div class="intro">
+      <p><span id="say">Hi, I’m Misha. I turn ideas into products teams can build.</span>
+        <span class="meta">Information Science at the University of Maryland, aspiring product & project manager</span></p>
+      <div class="flow" aria-label="Idea, then plan, then product">
+        <span class="note" style="--c:var(--rose)">Idea</span>
+        <svg viewBox="0 0 56 28" aria-hidden="true"><path d="M3 16 C 18 4, 34 26, 50 13 M43 8 L51 13 L45 20"/></svg>
+        <span class="note" style="--c:var(--lemon)">Plan</span>
+        <svg viewBox="0 0 56 28" aria-hidden="true"><path d="M3 12 C 18 24, 34 2, 50 15 M44 9 L51 15 L43 20"/></svg>
+        <span class="note" style="--c:var(--pistachio)">Product</span>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="band" aria-hidden="true"><div class="band-track" id="band"></div></div>
+
+<section id="work" data-tint="rose"><div class="wrap">
+  <h2 class="rv">Projects</h2>
+  <p class="lead rv">Each one starts with a problem worth solving. Open a project to see my role, the decisions I made and what we delivered.</p>
+  <div class="filters rv" role="group" aria-label="Filter projects">
+    <button aria-pressed="true" data-f="all">All</button>
+    <button aria-pressed="false" data-f="Lead">Team leadership</button>
+    <button aria-pressed="false" data-f="Tech">Tech & AI</button>
+    <button aria-pressed="false" data-f="Research">User research</button>
+  </div>
+  <ul class="board" id="board"></ul>
+</div></section>
+
+
+
+
+<section class="vig" aria-hidden="true"><div class="wrap">
+  <p class="cap">And yes, I’m comfortable in the code.<small>Python, SQL, R and AI tools, used in real projects.</small></p>
+  <div class="term note" id="term" style="--c:var(--lavender)"><div class="dots"><i></i><i></i><i></i></div><div id="termtext"></div></div>
+</div></section>
+
+<section id="research" data-tint="sky"><div class="wrap">
+  <h2 class="rv">Research</h2>
+  <p class="lead rv">Two first-author papers at HCI International. Research is how I check that an idea holds up with real people.</p>
+  <div class="papers">
+    <article class="paper note tape stick" style="--c:var(--sky)">
+      <div class="venue">HCII 2026, Montreal</div>
+      <h3>Who Creates, Who Owns, Who Buys? Perceived Authorship and Purchase Intention in AI-Generated Music</h3>
+      <p>Studied how AI-generated pop songs shape whether teenagers want to buy music, and who they think the real author is.</p>
+    </article>
+    <article class="paper note tape stick" style="--c:var(--pistachio);--d:.12s">
+      <div class="venue">HCII 2023, Copenhagen, poster</div>
+      <h3>Exploring How Adolescents Collaborate with Robots</h3>
+      <p>Programmed Nao, a two-foot humanoid robot, to simulate human behavior in experiments with adolescents.</p>
+      <a href="https://doi.org/10.1007/978-3-031-49215-0_21" target="_blank" rel="noopener">Read the paper</a>
+    </article>
+  </div>
+  <p class="now rv">Now: independent research with Dr. Grimmer at UMD, working on system design and study protocol for an upcoming submission. Earlier mentored research (2022–2025) with Dr. Pin-Hsuan Chen, Tsinghua University.</p>
+</div></section>
+
+
+<section class="vig" aria-hidden="true"><div class="wrap">
+  <div class="eq" id="eq"></div>
+  <p class="cap">Music is how I think in rhythm.<small>Two university choirs, and research on AI-generated music.</small></p>
+</div></section>
+
+<section id="about" data-tint="pistachio"><div class="wrap">
+  <div class="about">
+    <div class="rv">
+      <h2>About me</h2>
+      <p>I’m the person on a team who brings the idea, then makes sure it gets built. I like turning a fuzzy problem into a clear plan, getting everyone aligned, and staying close enough to the tech to know what’s possible.</p>
+      <p>I study Information Science at UMD with a minor in General Business. I grew up between Beijing and Taipei and spent a year as an exchange student in Maryland, so working across cultures and time zones feels natural to me.</p>
+      <p>I’m most excited about products at the intersection of AI, music and accessibility.</p>
+      <div class="side"><h3>When I’m not building</h3>
+        <p style="color:var(--ink-soft);font-size:15.5px">I sing in two university choirs and draw my own characters.</p>
+        <div class="side-row" id="side"></div>
+      </div>
+    </div>
+    <div class="skills">
+      <div class="skill note stick" style="--c:var(--rose);--r:-1deg"><h3>Leadership</h3><p>Led a 12-person team across 4 countries; ran 21 orientation sessions for 300+ students; project lead at Technica</p></div>
+      <div class="skill note stick" style="--c:var(--sky);--r:1.5deg;--d:.08s"><h3>Code & data</h3><p>Python, R, PostgreSQL, GitHub, VS Code, Choregraphe (Nao robots)</p></div>
+      <div class="skill note stick" style="--c:var(--lemon);--r:-2deg;--d:.16s"><h3>AI tools</h3><p>ElevenLabs, 3LC data-centric AI, Figma Make</p></div>
+      <div class="skill note stick" style="--c:var(--pistachio);--r:2deg;--d:.24s"><h3>Prototyping</h3><p>Figma, Notion, Excel, Canva</p></div>
+      <div class="skill note stick" style="--c:var(--peach);--r:-1.5deg;--d:.32s"><h3>Languages</h3><p>Mandarin, English</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="vig" aria-hidden="true"><div class="wrap">
+  <svg class="doodle" id="doodle" viewBox="0 0 300 220">
+    <path class="rays" pathLength="1" d="M150 6 L150 22 M86 26 L97 39 M214 26 L203 39 M62 92 L78 92 M238 92 L222 92"/>
+    <path class="bulb" pathLength="1" d="M150 40 C 113 40 94 66 94 93 C 94 114 108 126 118 138 C 124 145 126 152 126 160 L 174 160 C 174 152 176 145 182 138 C 192 126 206 114 206 93 C 206 66 187 40 150 40 Z"/>
+    <path pathLength="1" d="M136 160 L 140 112 L 150 125 L 160 112 L 164 160"/>
+    <path pathLength="1" d="M126 174 L174 174 M131 188 L169 188 M141 202 L159 202"/>
+  </svg>
+  <p class="cap">Every project starts as a doodle.<small>I’ve been drawing my whole life. Now I sketch ideas before I plan them.</small></p>
+</div></section>
+
+<section id="experience" data-tint="peach"><div class="wrap">
+  <h2 class="rv">Experience</h2>
+  <p class="lead rv">Most recent first.</p>
+  <ol class="tl" id="tl">
+    <li class="rv" style="--c:var(--rose)"><div class="when">Sep 2026 – Now</div><h3>Marketing Coordinator, Maryland Music Business Society</h3><p>Running the society’s Instagram and social media, and planning events with the board.</p></li>
+    <li class="rv" style="--c:var(--lemon)"><div class="when">Sep 2026 – Now</div><h3>Academic Peer Mentor, University of Maryland</h3><p>Supporting students academically alongside other mentors and faculty.</p></li>
+    <li class="rv" style="--c:var(--sky)"><div class="when">May – Aug 2026</div><h3>Orientation Advisor, University of Maryland</h3><p>The only international advisor selected; led 21 orientation sessions for 300+ new students.</p></li>
+    <li class="rv" style="--c:var(--pistachio)"><div class="when">Mar 2026</div><h3>3LC Data-Centric AI Hackathon</h3><p>Built an image classifier that tells a Chihuahua from a muffin in 48 hours.</p></li>
+    <li class="rv" style="--c:var(--lavender)"><div class="when">2025 – 2029</div><h3>B.S. Information Science, University of Maryland</h3><p>Minor in General Business. College of Information Dean’s List.</p></li>
+    <li class="rv" style="--c:var(--peach)"><div class="when">2024 – 2025</div><h3>Exchange Student, BridgeUSA Program</h3><p>Kent County High School, Maryland. GPA 4.0. Mentored peers in choir and shared Eastern vocal techniques.</p></li>
+  </ol>
+</div></section>
+
+<div class="wrap">
+  <div class="contact note tape stick" id="contact" style="--c:var(--lemon)">
+    <h2>Have an idea? Let’s build it.</h2>
+    <a class="mail" href="mailto:mrau12@terpmail.umd.edu">mrau12@terpmail.umd.edu</a>
+    <div class="links"><a href="https://www.linkedin.com/in/mu-shan-rau" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mrau12-glitch" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+  <footer>© 2026 Mu Shan Rau</footer>
+</div>
+
+<div id="morph" hidden></div>
+<div class="case" id="case" hidden data-lenis-prevent role="dialog" aria-modal="true" aria-label="Project details"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+document.documentElement.classList.add("js");
+const CDN="https://cdn.myportfolio.com/61ac379a-3420-42de-bd57-f637e4de0fad/";
+
+/* ============ 项目内容：改这里就能更新网站 ============ */
+const PROJECTS=[
+ {id:"cstar",title:"Cstar Music",short:"Cstar Music",color:"lemon",year:"2026",cats:["Lead","Tech"],
+  img:"https://github.com/mrau12-glitch/Cstar_2026technica/raw/main/2026technica_figma_2/public/cstar-logo.png",
+  stack:["TypeScript","Python","ElevenLabs API","Figma Make"],
+  tags:"Project Lead | Accessibility | Voice AI",
+  summary:"I led our team at Technica 2026 to build a browser-based music workspace that blind and low-vision musicians can use by listening.",
+  facts:{Role:"Project lead",Event:"Technica 2026",Timeline:"24 hours",Users:"Blind & low-vision musicians"},
+  embed:"https://russet-tusk-13606100.figma.site",
+  sections:[
+   ["Why we started","Most music tools communicate important information visually, so blind and low-vision musicians struggle to know where they are, what’s available and what will happen when they act. We wanted music-making without sight to feel less like facing a screen alone, and more like talking with someone who understands your love of music."],
+   ["The name","Cstar comes from seastar: an ocean animal that explores the world with its arms more than its eyes. Our users are the seastar musicians, creating with every sense but sight."],
+   ["My role","I set the project’s vision and owned the plan, from design principles and workflow to assembling the build and submitting on time."],
+   ["Product principles","We agreed on four rules: the interface must be understandable by listening, keyboard actions must be easy to discover, users should be free to experiment musically, and every action needs clear feedback."],
+   ["What we shipped","A project workspace with track creation and playback; a drum sequencer with keyboard-accessible pads, layered recording, count-in and looping; audio recording and file import; keyboard shortcuts; and a natural read-aloud voice powered by ElevenLabs that falls back to the device voice when the service isn’t available."],
+   ["Challenges","Accessibility went far beyond focusable buttons. We had to make page layout, the current control, shortcuts and recording state all understandable through sound, and handle audio and text-to-speech differences across browsers and deployments."],
+   ["What’s next","Test the workflow with blind and low-vision musicians and let their feedback lead, improve spoken navigation, and explore turning Cstar into a plugin for popular music tools."]
+  ],links:[["Try the live prototype","https://russet-tusk-13606100.figma.site"],["View code on GitHub","https://github.com/mrau12-glitch/Cstar_2026technica"]]},
+ {id:"cn",title:"Career Narrator",short:"Career Narrator",color:"rose",year:"2026",cats:["Lead"],
+  img:CDN+"d4fa717d-2b75-435d-ba6b-f2061a8a51e0_rwc_255x0x1275x997x1275.jpg?h=165dcd46a90770301a877c095b56e1ef",
+  tags:"Team Lead | Program Strategy | Global Team",
+  summary:"I led 12 people across 4 countries to design a 3-day program that helps students tell their story for the careers they want.",
+  facts:{Role:"Team lead",Team:"12 people, 4 countries",Program:"U21 Micro-internship",Client:"Common Purpose"},
+  sections:[
+   ["The brief","Common Purpose asked randomly formed teams to design a 3-day program that prepares students for future success."],
+   ["My role","I led a team spread across the UK, India, the Netherlands and the US, from choosing a theme to the final pitch."],
+   ["Key decisions","We grounded the theme in our own college experiences so the program would solve a real need, then planned the activities around it. To keep everyone aligned across time zones, I made sure every meeting had shared notes for teammates who couldn’t attend."],
+   ["Outcome","We delivered a poster, a presentation and a written proposal, and pitched the final program to Common Purpose."]
+  ],links:[["View presentation","https://www.canva.com/design/DAG_ncfbQGM/8jKTvdYUN9ggx-KyOPnGYA/view"]]},
+ {id:"bz",title:"BitazOne",short:"BitazOne",color:"lavender",year:"2025",cats:["Tech","Research"],
+  img:CDN+"1e98ae2e-3967-4d84-b889-38a30696816d_rwc_0x54x500x390x500.png?h=63a450d085d15550ca1d5650b71d0f8b",
+  stack:["Python","Figma Make"],
+  tags:"Product Owner | AI | Python",
+  summary:"My own product idea: an AI tool that creates, optimizes and maps dance formations for K-pop and dance cover groups.",
+  facts:{Role:"Product owner & developer",Timeline:"Oct 2025 – ongoing",Users:"Dance cover groups",Tech:"Python, Figma Make"},
+  sections:[
+   ["The problem","The documentary SEVENTEEN: Our Chapter shows how hard it is to rework formations when members are away. Dance cover groups also spend hours turning practice videos into formation blocks by hand."],
+   ["Research","K-pop dance databases already represent dancers as x and y points, which showed me the problem was technically solvable from a top-down view. I interviewed two members of GGWB, a K-pop dance group at UMD, and learned cover groups rarely design formations from scratch. What they need is a fast way to fix formations that don’t fit their group."],
+   ["Key decisions","I scoped the product around that real need, mapped the user flow before building anything, and named it BitazOne, from the Japanese “bita-zoroi”, meaning perfectly synchronized."],
+   ["Building it","I wrote Python that tracks dancers in a video and generates a top-down video of every formation change, alongside an interactive prototype."],
+   ["Next steps","Improve the accuracy of the top-down video, and keep each dancer’s number fixed so the same person is always easy to follow."]
+  ],links:[["Open the prototype","https://www.figma.com/make/ZtnEjvFnnHhCgPdMA1VhQi/AI-Dance-Formation-Optimizer?t=sHXvm6Y0pEL9flqD-1"],["View code on GitHub","https://github.com/mrau12-glitch/Aidanceformationoptimizer"]]},
+ {id:"ttu",title:"Tech Turn Up Creative Base Station",short:"Tech Turn Up",color:"sky",year:"2026",cats:["Research"],
+  img:CDN+"abfbe097-3438-4393-a95a-6ed6afc79335_rwc_255x0x1277x999x1277.jpg?h=667b5f1179d8cdf59cef3ddf6dd89350",
+  stack:["Figma"],
+  tags:"User Research | Mobile Product | STEM",
+  summary:"A mobile platform that keeps Tech Turn Up students learning and connected after classes end, made in a 48-hour makeathon.",
+  facts:{Role:"Team member",Event:"UX Terps × Hack4Impact",Timeline:"48 hours",Scale:"~150 participants"},
+  sections:[
+   ["The problem","Once classes end, students lose their community, their identity as creators, and, for those who can’t attend in person, access altogether. Tech Turn Up had no structured online program to keep their momentum."],
+   ["Research","We interviewed facilitators, high school and elementary students, and teachers to find out what the platform needed to do."],
+   ["How we worked","Each teammate sketched their own version, then we merged the strongest ideas into one plan and built the prototype in Figma, checking every planned feature was covered."],
+   ["What I’d do next","Add a web version for students with computers, and solve how to embed coding tools, since some popular languages can’t run inside a phone app."]
+  ],links:[["View presentation","https://www.canva.com/design/DAHFVsekIuM/198PdZeUU4vhY6op9vGYXA/view"]]}
+];
+
+const ART=[
+ {title:"Mu Yu Chen",color:"lavender",year:"2026",img:CDN+"43ca856a-fe6a-4530-8c98-3c05da62b69c_rwc_0x111x1640x1282x1640.JPG?h=611fc770f418a3ae17c8bd79a046d70c",
+  tags:"Original character",summary:"A human warrior who devotes his life to hunting invading alien monsters.",facts:{},sections:[]},
+ {title:"Lan Ying",color:"sky",year:"2026",img:CDN+"637ffb68-8b16-4c32-8ccb-be260a936593_rwc_133x0x2097x1640x2097.JPG?h=acf9748529fc6e9cef6f9b8f994b4c56",
+  tags:"Original character",summary:"A supernatural warrior who devotes his life to hunting invading alien monsters.",facts:{},sections:[]},
+ {title:"Mu Li",color:"pistachio",year:"2026",img:CDN+"31da400d-b2f1-46c9-99eb-d6753024424c_rwc_0x299x1080x844x1080.JPG?h=d61ea1bcaf6ad837f1d0c96e171d5605",
+  tags:"Original character",summary:"A puppy-like student training himself to become an alien hunter.",facts:{},sections:[]}
+];
+
+
+
+const $=s=>document.querySelector(s);
+const COLORS=["rose","peach","lemon","pistachio","sky","lavender"];
+const motionOK=!matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* 顺滑滚动（Lenis；没联网时自动退回普通滚动） */
+let lenis=null;
+if(motionOK&&window.Lenis){
+  lenis=new Lenis({lerp:.16,wheelMultiplier:1.1,smoothWheel:true});
+  (function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{
+    const t=document.querySelector(a.getAttribute("href"));if(!t)return;e.preventDefault();lenis.scrollTo(t,{offset:-70})}));
+}
+
+/* 名字：每个字母是一张便利贴 */
+let k=0;
+$("#name").innerHTML="Mu Shan Rau".split(" ").map(w=>`<span class="w" aria-hidden="true">${
+  [...w].map(ch=>{const i=k++;const r=[-5,3,-2,4,-3,2,-4,3,-1][i%9];const kk=[.12,.3,.2,.38,.16,.28,.1,.34,.22][i%9];
+    return `<span class="tile" style="--i:${i};--r:${r}deg;--k:${kk};--c:var(--${COLORS[i%6]})">${ch}</span>`}).join("")}</span>`).join("");
+
+/* 自我介绍：一个词一个词浮现 */
+const say=$("#say");say.innerHTML=say.textContent.split(" ").map((w,i)=>`<span class="wd" style="--w:${i}">${w}</span>`).join(" ");
+
+/* keyword band */
+const words=[["Product strategy","rose"],["Team leadership","lemon"],["AI","sky"],["Python","pistachio"],["HCI research","lavender"],["Rapid prototyping","peach"]];
+const half=words.map(([w,c])=>`<span>${w}<i style="--c:var(--${c})"></i></span>`).join("");
+$("#band").innerHTML=half+half+half;
+
+/* projects */
+const ROT=[-1.6,1.4,1.1,-1.3];
+PROJECTS.forEach((p,i)=>{
+  const li=document.createElement("li");li.dataset.cats=p.cats.join(" ");
+  li.className="stick";li.style.setProperty("--d",(i%2*.12)+"s");
+  li.innerHTML=`<button class="pcard note tape" style="--c:var(--${p.color});--r:${ROT[i%4]}deg">
+    <div class="pic">${p.img?`<img src="${p.img}" alt="" loading="lazy">`:`<div class="ph">${p.title}</div>`}</div>
+    <span class="tags">${p.tags}, ${p.year}</span><h3>${p.title}</h3><p>${p.summary}</p>
+    ${p.stack?`<span class="chips">${p.stack.map(t=>`<span>${t}</span>`).join("")}</span>`:""}<span class="more">Read the case study</span></button>`;
+  const b=li.querySelector("button");p.el=b;b.onclick=()=>openCase(p,b);
+  $("#board").appendChild(li);
+});
+
+/* artwork polaroids */
+ART.forEach(a=>{
+  const b=document.createElement("button");b.setAttribute("aria-label","View "+a.title);
+  b.innerHTML=`<img src="${a.img}" alt="" loading="lazy">`;a.el=b;b.onclick=()=>openCase(a,b);$("#side").appendChild(b);
+});
+
+/* 音乐小动画 */
+const eq=$("#eq");
+for(let i=0;i<26;i++){const s=document.createElement("span");
+  s.style.cssText=`--c:var(--${COLORS[i%6]});--d:${(-Math.random()*1.1).toFixed(2)}s;--h:${(.45+Math.random()*.55).toFixed(2)}`;eq.appendChild(s)}
+["♪","♫","♪"].forEach((n,i)=>{const b=document.createElement("b");b.textContent=n;b.style.cssText=`left:${18+i*30}%;--d:${i*1.05}s`;eq.appendChild(b)});
+
+/* 科技小动画：打字 */
+const LINES=[["> misha.focus()",""],["  AI, music, accessibility",""],["> python formation_tracker.py",""],["  ✓ top-down video generated","ok"],["> ship --hours 24",""],["  ✓ Cstar Music submitted","ok"]];
+let typed=false;
+function typeTerm(){
+  if(typed)return;typed=true;const out=$("#termtext");
+  if(!motionOK){out.innerHTML=LINES.map(([t,c])=>`<div class="${c}">${t}</div>`).join("");return}
+  let li=0,ch=0,line=null;
+  (function step(){
+    if(li>=LINES.length){out.insertAdjacentHTML("beforeend",'<span class="cur"></span>');return}
+    if(!line){line=document.createElement("div");line.className=LINES[li][1];out.appendChild(line)}
+    const t=LINES[li][0];
+    if(t.startsWith("  ")){line.textContent=t;li++;ch=0;line=null;setTimeout(step,420);return}
+    line.textContent=t.slice(0,++ch);
+    if(ch>=t.length){li++;ch=0;line=null;setTimeout(step,300)}else setTimeout(step,45+Math.random()*50);
+  })();
+}
+
+/* ============ 项目详情：便利贴展开成整页 ============ */
+const caseEl=$("#case"),morph=$("#morph"),EASE="cubic-bezier(.75,0,.2,1)";
+const LIST=PROJECTS;let cur=null,origin=null,busy=false;
+const clipOf=r=>`inset(${r.top}px ${innerWidth-r.right}px ${innerHeight-r.bottom}px ${r.left}px round 6px)`;
+const FULL="inset(0px 0px 0px 0px round 0px)";
+
+function render(p){
+  const idx=LIST.indexOf(p);
+  const facts=Object.entries(p.facts||{}).map(([k,v])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+  const secs=(p.sections||[]).map(([h,t])=>`<div class="case-sec rv"><h2>${h}</h2><p>${t}</p></div>`).join("");
+  const links=(p.links||[]).map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}</a>`).join("");
+  const nxt=idx>-1?LIST[(idx+1)%LIST.length]:null;
+  caseEl.style.setProperty("--c",`var(--${p.color})`);
+  caseEl.innerHTML=`
+   <div class="case-bar"><button class="back"><svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19"/></svg>Back to projects</button>
+     ${idx>-1?`<span class="count">${idx+1} of ${LIST.length}</span>`:""}</div>
+   <header class="case-head"><div class="wrap">
+     <div><div class="tags ci" style="--d:.05s">${p.tags}, ${p.year}</div>
+       <h1 class="ci" style="--d:.12s">${p.title}</h1><p class="sum ci" style="--d:.22s">${p.summary}</p>
+       ${facts?`<dl class="facts ci" style="--d:.32s">${facts}</dl>`:""}
+       ${p.stack?`<div class="chips ci" style="--d:.4s">${p.stack.map(t=>`<span>${t}</span>`).join("")}</div>`:""}</div>
+     <div class="polaroid tape ci" style="--d:.3s">${p.img?`<img src="${p.img}" alt="${p.title}">`:`<div class="ph">Images coming soon</div>`}</div>
+   </div></header>
+   <div class="wrap">
+     <div class="case-body">${secs}
+       ${p.embed?`<div class="case-sec rv"><h2>Try it</h2><div><div class="embed" data-src="${p.embed}"><button class="load">Load the live prototype here</button></div>
+         <p class="embed-note">Works best in a new tab: <a href="${p.embed}" target="_blank" rel="noopener">open the prototype</a>.</p></div></div>`:""}</div>
+     ${links?`<div class="case-links rv">${links}</div>`:""}
+     ${nxt?`<button class="next note tape rv" style="--c:var(--${nxt.color})"><span>Next project</span><strong>${nxt.title}</strong></button>`:`<div style="height:60px"></div>`}
+   </div>`;
+  caseEl.querySelector(".back").onclick=closeCase;
+  caseEl.querySelectorAll(".embed .load").forEach(b=>b.onclick=()=>{const box=b.parentElement;
+    box.innerHTML=`<iframe src="${box.dataset.src}" title="Live prototype" loading="lazy" allow="autoplay; microphone"></iframe>`});
+  if(nxt)caseEl.querySelector(".next").onclick=()=>swapCase(nxt);
+  const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");cio.unobserve(e.target)}}),{root:caseEl,rootMargin:"0px"});
+  caseEl.querySelectorAll(".rv").forEach(el=>cio.observe(el));
+  caseEl.scrollTop=0;cur=p;
+}
+function lock(on){
+  document.documentElement.style.overflow=on?"hidden":"";
+  if(lenis)on?lenis.stop():lenis.start();
+}
+async function openCase(p,el){
+  if(busy)return;busy=true;origin=el;render(p);lock(true);
+  if(motionOK){
+    morph.style.background=`var(--${p.color})`;morph.hidden=false;
+    await morph.animate([{clipPath:clipOf(el.getBoundingClientRect())},{clipPath:FULL}],{duration:560,easing:EASE,fill:"forwards"}).finished;
+  }
+  caseEl.hidden=false;caseEl.classList.add("open");
+  if(motionOK)await caseEl.animate([{opacity:0},{opacity:1}],{duration:260,fill:"forwards"}).finished;
+  morph.hidden=true;caseEl.querySelector(".back").focus({preventScroll:true});busy=false;
+}
+async function closeCase(){
+  if(busy||caseEl.hidden)return;busy=true;
+  if(motionOK){
+    morph.hidden=false;morph.getAnimations().forEach(a=>a.cancel());morph.style.clipPath=FULL;
+    await caseEl.animate([{opacity:1},{opacity:0}],{duration:240,fill:"forwards"}).finished;
+  }
+  caseEl.hidden=true;caseEl.classList.remove("open");caseEl.getAnimations().forEach(a=>a.cancel());
+  const target=(cur&&cur.el)||origin;
+  if(motionOK){
+    await morph.animate([{clipPath:FULL},{clipPath:clipOf(target.getBoundingClientRect())}],{duration:500,easing:EASE,fill:"forwards"}).finished;
+    morph.hidden=true;morph.getAnimations().forEach(a=>a.cancel());morph.style.clipPath="";
+  }
+  lock(false);target.focus({preventScroll:true});busy=false;
+}
+async function swapCase(p){
+  if(busy)return;busy=true;
+  if(motionOK){
+    morph.style.background=`var(--${p.color})`;morph.hidden=false;
+    await morph.animate([{clipPath:"inset(100% 0px 0px 0px)"},{clipPath:"inset(0% 0px 0px 0px)"}],{duration:480,easing:EASE,fill:"forwards"}).finished;
+  }
+  caseEl.classList.remove("open");render(p);void caseEl.offsetWidth;caseEl.classList.add("open");
+  if(motionOK){await morph.animate([{opacity:1},{opacity:0}],{duration:350,fill:"forwards"}).finished;
+    morph.hidden=true;morph.getAnimations().forEach(a=>a.cancel())}
+  busy=false;
+}
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!caseEl.hidden)closeCase()});
+
+/* filters */
+document.querySelectorAll(".filters button").forEach(btn=>btn.onclick=()=>{
+  document.querySelectorAll(".filters button").forEach(b=>b.setAttribute("aria-pressed",b===btn));
+  document.querySelectorAll("#board li").forEach(li=>li.hidden=!(btn.dataset.f==="all"||li.dataset.cats.includes(btn.dataset.f)));
+});
+
+/* ============ 滚动效果 ============ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");
+  if(e.target.id==="term")typeTerm();io.unobserve(e.target)}}),{rootMargin:"0px"});
+document.querySelectorAll("main .rv, body > section .rv, .wrap .rv, .stick, #eq, #term").forEach(el=>{if(!el.closest("#case"))io.observe(el)});
+setTimeout(()=>document.querySelectorAll(".rv,.stick").forEach(el=>{if(!el.closest("#case")&&el.getBoundingClientRect().top<innerHeight)el.classList.add("in")}),3000);
+
+const tio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.documentElement.style.setProperty("--tint",e.target.dataset.tint?`var(--${e.target.dataset.tint})`:"var(--bg)")}),{rootMargin:"-45% 0px -45% 0px"});
+document.querySelectorAll("[data-tint],.hero").forEach(s=>tio.observe(s));
+
+const doodle=$("#doodle");
+let ticking=false;
+function onScroll(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+  document.documentElement.style.setProperty("--p",max>0?y/max:0);
+  if(motionOK){
+    $("#name").style.setProperty("--s",Math.min(y,700));
+    const band=$("#band");band.style.setProperty("--m",(y*.45)%(band.scrollWidth/3));
+    const tl=$("#tl").getBoundingClientRect();
+    $("#tl").style.setProperty("--tp",Math.max(0,Math.min(1,(innerHeight*.75-tl.top)/tl.height)));
+    const dr=doodle.getBoundingClientRect();
+    const dp=Math.max(0,Math.min(1,(innerHeight*.95-dr.top)/(innerHeight*.55)));
+    doodle.style.setProperty("--dp",dp);doodle.classList.toggle("lit",dp>.97);
+  }else doodle.classList.add("lit");
+  ticking=false;
+}
+addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+addEventListener("resize",onScroll);
+onScroll();
+</script>
+</body>
+</html>
