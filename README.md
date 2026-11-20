@@ -23,6 +23,8 @@ Live site: https://mrau12-glitch.github.io
 - 图片原图在 `assets/images/<分类>/<作品>/`，点开大图时显示的就是原图。
 - 网页上直接显示的是压缩版 `assets/thumbs/…/*.webp`（最长边 1200px）。新加图片后，也要放一份压缩版进去。
 
-## 水墨主题预览（`ink.html`）
 
-`ink.html` 是用 Misha 自己的线稿做的水墨主题预览，内容和 `index.html` 一样。线稿是从照片转出来的矢量图，放在 `assets/ink/`（`misha.svg` 是签名）。确定要用的话，把 `ink.html` 改名成 `index.html` 就行。
+## 网站风格（水墨主题）
+
+整站是米白纸加黑墨线，配色在 `index.html` 最后一段 `INK THEME` 里（`--paper` 纸色、`--ink` 墨色、`--accent` 朱红）。
+线稿是从 Misha 的手绘照片转出来的矢量图，在 `assets/ink/`：`misha.svg` 是签名（Logo 和页脚），`butterfly.svg` 是首页那只蝴蝶，其他几张先留着备用。
