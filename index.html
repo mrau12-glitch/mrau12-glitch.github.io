@@ -6,7 +6,7 @@
 <title>Mu Shan (Misha) Rau — Product & Project Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============ 配色：改这里就能换整站颜色 ============ */
 :root{
@@ -204,6 +204,43 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 .next span{font:600 24px var(--hand)}
 .next strong{display:block;font:800 clamp(28px,3.4vw,40px)/1.1 var(--display);letter-spacing:-.02em;margin-top:4px}
 
+/* artwork：拍立得墙 */
+.artgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:46px 34px;list-style:none}
+.acard{position:relative;display:block;width:100%;border:0;cursor:pointer;font:inherit;color:#2B2442;text-align:left;background:#fff;padding:12px 12px 18px;border-radius:2px;
+  box-shadow:var(--shadow);rotate:var(--r,0deg);transition:rotate .35s ease,translate .35s cubic-bezier(.3,1.5,.5,1)}
+.acard:hover,.acard:focus-visible{rotate:0deg;translate:0 -6px}
+.acard .pic{position:relative;aspect-ratio:1640/1282;overflow:hidden;background:color-mix(in srgb,var(--c) 45%,#fff)}
+.acard .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s ease}
+.acard .pic .hov{opacity:0}
+.acard:hover .pic .hov,.acard:focus-visible .pic .hov{opacity:1}
+.acard h3{font:600 30px/1 var(--hand);margin:14px 4px 2px}
+.acard span{display:block;margin:0 4px;font-size:14px;color:#5E5677}
+.acard i{position:absolute;top:-10px;right:18px;width:34px;height:34px;border-radius:6px;background:var(--c);rotate:12deg;box-shadow:var(--shadow)}
+
+/* case study 里的图片 */
+.shots{display:grid;grid-template-columns:1fr;gap:18px;margin-top:22px}
+.case-sec>div>.shots:first-child{margin-top:0}
+.shots.two{grid-template-columns:1fr 1fr;align-items:start}
+.shots.many{display:block;columns:3 220px;column-gap:18px}
+.shots.many figure{break-inside:avoid;margin-bottom:18px}
+.shots figure{background:#fff;padding:8px 8px 10px;border-radius:2px;box-shadow:var(--shadow)}
+.shots .shot{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.shots img{width:100%;height:auto}
+.shots:not(.two):not(.many) img{max-height:78vh;object-fit:contain;background:#fff}
+.shots figcaption{font:600 20px/1.2 var(--hand);color:#2B2442;padding:8px 4px 0}
+.case-sec .note-line{margin-top:18px;font-size:16px!important;color:var(--ink-soft)}
+
+/* lightbox：点图片看原图 */
+.lb{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
+  padding:60px 70px 30px;background:rgba(20,16,30,.92)}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;border-radius:3px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.lb p{color:#F2EEFB;font:600 24px var(--hand);min-height:1.2em;text-align:center}
+.lb button{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;font:600 22px var(--body)}
+.lb button[hidden]{display:none}
+.lb button:hover{background:rgba(255,255,255,.26)}
+.lb .x{top:16px;right:18px}.lb .pv{left:14px;top:50%;margin-top:-24px}.lb .nx{right:14px;top:50%;margin-top:-24px}
+
 /* tech chips + embed */
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 6px 0}
 .chips span{font-size:13px;font-weight:600;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.6);color:var(--note-ink)}
@@ -239,27 +276,193 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 
 @media (max-width:860px){
   nav ul{gap:14px;font-size:14px}
-  nav ul li:nth-child(4){display:none}
+  nav ul li:nth-child(5){display:none}
   .board,.papers{grid-template-columns:1fr}
+  .artgrid{grid-template-columns:1fr 1fr;gap:34px 20px}
+  .lb{padding:60px 12px 80px}.lb .pv,.lb .nx{top:auto;bottom:18px;margin:0}.lb .pv{left:calc(50% - 60px)}.lb .nx{right:calc(50% - 60px)}
   .steps{grid-template-columns:1fr 1fr}
   .about{grid-template-columns:1fr;gap:36px}
   .case-head .wrap{grid-template-columns:1fr}
   .case-sec{grid-template-columns:1fr;gap:10px}
   .case-bar{padding:12px 16px}
 }
-@media (max-width:520px){.steps{grid-template-columns:1fr}.flow .note{font-size:23px;padding:8px 12px 10px}.flow svg{width:34px}.eq span{width:8px}}
+@media (max-width:520px){.artgrid{grid-template-columns:1fr}.shots.two{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.flow .note{font-size:23px;padding:8px 12px 10px}.flow svg{width:34px}.eq span{width:8px}}
+
+/* =====================================================================
+   INK THEME：米白纸 + 黑墨线，装饰全部来自 Misha 自己的线稿（assets/ink/）
+   ===================================================================== */
+:root{
+  --paper:#F4F1EA; --paper2:#EAE5DB; --ink:#161412; --ink-soft:#5F5A53; --accent:#A40000;
+  --line:rgba(22,20,18,.16);
+  --rose:var(--paper2);--peach:var(--paper2);--lemon:var(--paper2);--pistachio:var(--paper2);--sky:var(--paper2);--lavender:var(--paper2);
+  --bg:var(--paper);--surface:var(--paper);--note-ink:var(--ink);--dot:transparent;--shadow:none;
+  --display:"Fraunces","Noto Serif SC",Georgia,serif;
+  --hand:"Fraunces","Noto Serif SC",Georgia,serif;
+  --hatch:repeating-linear-gradient(-45deg,var(--ink) 0 1px,transparent 1px 7px);
+  --star:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#151413;--paper2:#1F1D1A;--ink:#EDE7DB;--ink-soft:#A8A196;--accent:#E3554C;--line:rgba(237,231,219,.18);color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#151413;--paper2:#1F1D1A;--ink:#EDE7DB;--ink-soft:#A8A196;--accent:#E3554C;--line:rgba(237,231,219,.18);color-scheme:dark}
+
+body{background-color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px}
+:focus-visible{outline-color:var(--accent)}
+.hand,.flow .note,.skill h3,.vig .cap,.eq b,.count,.case-sec h2,.next span,.acard h3,.shots figcaption,.lb p,.pcard .more{font-style:italic}
+
+/* 墨线稿：用 mask 上色，深色模式自动变白墨 */
+.ink-art{background:var(--ink);-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat;aspect-ratio:var(--ar)}
+.ink-art.reveal{clip-path:inset(0 0 100% 0)}
+.ink-art.reveal.in{clip-path:inset(0 0 0 0);transition:clip-path 2.2s cubic-bezier(.55,0,.25,1) var(--d,0s)}
+@media (prefers-reduced-motion:reduce){.ink-art.reveal{clip-path:none}}
+
+/* 签名 logo */
+.logo{display:inline-flex;align-items:center}
+.logo .sig{display:block;height:46px;width:61px;--src:url(assets/ink/misha.svg);--ar:357/271}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+nav{background:color-mix(in srgb,var(--paper) 80%,transparent)}
+nav .wrap{padding-top:10px;padding-bottom:8px}
+nav ul a{font-weight:500;color:var(--ink-soft);position:relative}
+nav ul a:hover{color:var(--ink)}
+nav ul a:hover::before{content:"";position:absolute;left:-14px;top:50%;width:9px;height:9px;margin-top:-4.5px;background:var(--accent);clip-path:var(--star)}
+
+/* 墨线进度：宽屏是左边一条往下长的墨线，窄屏是顶部细线 */
+.progress{height:2px;background:var(--ink)}
+.tip{display:none}
+@media (min-width:1300px){
+  .progress{top:0;bottom:0;left:30px;right:auto;width:1.5px;height:auto;transform-origin:top;transform:scaleY(var(--p,0))}
+  .tip{display:block;position:fixed;left:23px;top:calc(var(--p,0)*(100vh - 22px) + 3px);width:16px;height:16px;z-index:51;background:var(--ink);clip-path:var(--star)}
+}
+
+/* hero */
+.hero{position:relative}
+.hero-art{position:absolute;right:-70px;top:4vh;height:84vh;max-height:760px;--src:url(assets/ink/butterfly.svg);--ar:817/1932;pointer-events:none;transform-origin:18% 100%;translate:0 calc(var(--hs,0)*.22px)}
+.name{font:600 clamp(54px,9.2vw,132px)/.95 var(--display);letter-spacing:-.035em;gap:.06em .3em;max-width:9.5em;position:relative}
+.tile{background:none;box-shadow:none;rotate:0deg;min-width:0;padding:0;color:var(--ink)}
+.tile:hover{rotate:0deg;translate:0 -6%;color:var(--accent)}
+.name .w:last-child .tile{font-style:italic;font-weight:400}
+.intro{position:relative}
+.intro p{font:400 clamp(22px,2.5vw,30px)/1.3 var(--display)}
+.flow .note{background:none;border:1.5px solid var(--ink);border-radius:999px;font:italic 400 24px/1 var(--display);padding:9px 18px 11px}
+.flow svg{stroke-width:1.6}
+
+/* band */
+.band{background:none;border-block:1.5px solid var(--ink)}
+.band span{font:italic 400 clamp(34px,5.6vw,68px)/1 var(--display);letter-spacing:-.02em}
+.band i{width:.34em;height:.34em;border-radius:0;rotate:0deg;background:var(--accent);clip-path:var(--star)}
+
+/* 标题：墨笔划 + 一滴墨 */
+section h2{position:relative;font-weight:600;letter-spacing:-.03em}
+section > .wrap > h2::after,#about h2::after{content:"";display:block;width:120px;height:26px;margin-top:10px;background:var(--ink);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 26'%3E%3Cpath d='M2 6 C 30 2, 60 9, 92 4 S 116 5 118 6' stroke='black' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M86 6 C 86 12, 83 15, 83 18 a3 3 0 0 0 6 0 C 89 15, 86 12, 86 6Z'/%3E%3C/svg%3E") left/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 26'%3E%3Cpath d='M2 6 C 30 2, 60 9, 92 4 S 116 5 118 6' stroke='black' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M86 6 C 86 12, 83 15, 83 18 a3 3 0 0 0 6 0 C 89 15, 86 12, 86 6Z'/%3E%3C/svg%3E") left/contain no-repeat}
+.lead{color:var(--ink-soft)}
+.filters button{border:1.5px solid var(--ink);background:none}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* 卡片：细墨框，悬停出现排线 */
+.note{background:var(--paper);border:1.5px solid var(--ink);border-radius:2px;box-shadow:none}
+.tape::before{display:none}
+.pcard{padding:14px 14px 24px;transition:rotate .35s ease,translate .35s cubic-bezier(.3,1.5,.5,1),box-shadow .35s}
+.pcard:hover,.pcard:focus-visible{translate:-4px -4px;box-shadow:6px 6px 0 var(--ink)}
+.pcard .pic{border-radius:0;background:var(--paper2);position:relative}
+.pcard .pic::after{content:"";position:absolute;inset:0;background:var(--hatch);opacity:0;transition:opacity .35s;mix-blend-mode:multiply}
+.pcard:hover .pic::after{opacity:.12}
+.pcard .tags,.paper .venue,.case-head .tags,.acard span{font:600 12.5px var(--body);letter-spacing:.12em;text-transform:uppercase;opacity:1;color:var(--ink-soft)}
+.pcard h3{font-weight:600}
+.pcard .more{font:italic 400 19px var(--display)}
+.pcard .more::after{content:" →"}
+.chips span{background:none;border:1px solid var(--ink);color:var(--ink)}
+
+/* artwork */
+#artwork .wrap{position:relative}
+.acard{background:var(--paper);border:1.5px solid var(--ink);box-shadow:none;color:var(--ink);padding:12px 12px 16px;transition:rotate .35s ease,translate .35s cubic-bezier(.3,1.5,.5,1),box-shadow .35s}
+.acard:hover,.acard:focus-visible{translate:-4px -4px;box-shadow:6px 6px 0 var(--ink)}
+.acard i{display:none}
+.acard h3{font:italic 400 27px/1.1 var(--display);margin:14px 2px 4px}
+.acard span{margin:0 2px}
+
+/* research / about */
+.paper{padding:30px 32px}
+.paper h3{font-weight:600}
+.now{border:1.5px dashed var(--ink-soft);background:none;border-radius:2px}
+.about{position:relative}
+.skill h3{font:italic 600 24px/1 var(--display)}
+.side-row button{background:var(--paper);border:1.5px solid var(--ink);box-shadow:none}
+
+/* 小动画区 */
+.vig .cap{font:italic 400 clamp(26px,3vw,34px)/1.2 var(--display)}
+.doodle path{stroke-width:2.6}
+.doodle .bulb{fill:var(--paper2)}
+.doodle .rays{stroke:var(--accent);stroke-width:3.5}
+.eq span{background:var(--ink)}
+.eq b{font:italic 400 30px var(--display)}
+.term{background:var(--paper2)}
+.term .dots i{background:var(--ink-soft)}
+.term .ok{color:var(--accent)}
+
+/* 时间轴：串珠点线 + 四角星 */
+.tl::before{width:4px;left:-.5px;border-radius:0;background:radial-gradient(circle,var(--ink) 1.6px,transparent 2.1px) center top/4px 11px repeat-y}
+.tl li::before{left:-8px;top:5px;width:20px;height:20px;border-radius:0;rotate:0deg;background:var(--ink);clip-path:var(--star)}
+.tl li:first-child::before{background:var(--accent)}
+.tl h3{font-weight:600}
+
+/* contact */
+.contact{position:relative;overflow:visible;padding:90px 28px}
+.contact h2{font-weight:600}
+.contact h2 em{font-weight:400}
+.contact a.mail{font:italic 400 clamp(19px,2.8vw,30px) var(--display);text-decoration-thickness:1.5px}
+footer .sig{display:inline-block;width:72px;height:55px;--src:url(assets/ink/misha.svg);--ar:357/271;vertical-align:middle;margin-left:6px}
+
+/* 项目详情页 */
+.case{background-color:var(--paper);background-image:none}
+.case-head{background:var(--paper2);border-bottom:1.5px solid var(--ink);color:var(--ink)}
+.case-head h1{font-weight:600;letter-spacing:-.03em}
+.fact{background:none;border:1px solid var(--ink);box-shadow:none;border-radius:2px}
+.polaroid{background:var(--paper);border:1.5px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:10px}
+.case-sec{border-top:1.5px dashed var(--line)}
+.case-sec h2{font:italic 400 clamp(28px,3vw,38px)/1.1 var(--display)}
+.case-sec h2::before{content:"";display:inline-block;width:13px;height:13px;margin-right:10px;background:var(--accent);clip-path:var(--star);vertical-align:.25em}
+.case-links a,.back{background:var(--ink);color:var(--paper)}
+.count{font:italic 400 20px var(--display);background:var(--paper)}
+.shots figure{background:var(--paper);border:1px solid var(--line);box-shadow:none;padding:6px 6px 8px}
+.shots figcaption{font:italic 400 18px/1.2 var(--display);color:var(--ink)}
+.shots:not(.two):not(.many) img{background:var(--paper)}
+.next{border:1.5px solid var(--ink)}
+.next:hover{translate:-4px -4px;box-shadow:6px 6px 0 var(--ink)}
+.next span{font:italic 400 20px var(--display)}
+.next strong{font-weight:600}
+.embed{background:var(--paper2);border:1.5px solid var(--ink);box-shadow:none;border-radius:2px}
+.lb{background:rgba(12,11,10,.94)}
+
+@media (prefers-reduced-motion:no-preference){
+  /* 首页线稿：先像墨水一样往下流出来，然后轻轻摆动；滚动时有一点视差 */
+  .hero-art{animation:inkdown 2.6s cubic-bezier(.55,0,.25,1) .5s both,sway 7s ease-in-out 3.1s infinite alternate}
+  @keyframes inkdown{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes sway{from{rotate:-1.6deg}to{rotate:1.8deg}}
+  /* 标题下的墨笔划：跟着标题一起"写"出来 */
+  .js section h2::after{clip-path:inset(0 100% 0 0);transition:clip-path .9s cubic-bezier(.6,0,.2,1) .35s}
+  .js .in h2::after,.js h2.in::after{clip-path:inset(0 0 0 0)}
+}
+.hero{overflow-x:clip}
+@media (max-width:520px){.flow .note{font-size:18px;padding:7px 11px 9px}.flow svg{width:26px}}
+@media (max-width:860px){
+  .hero-art{height:52vh;right:-40px;top:auto;bottom:4vh;opacity:.22}
+  .logo .sig{height:40px;width:53px}
+}
 </style>
 </head>
 <body>
-<div class="progress" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div><div class="tip" aria-hidden="true"></div>
 
 <nav><div class="wrap">
-  <a class="logo" href="#top">Misha Rau</a>
-  <ul><li><a href="#work">Projects</a></li><li><a href="#research">Research</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a class="logo" href="#top" aria-label="Misha Rau, back to top"><span class="sig ink-art" aria-hidden="true"></span><span class="sr">Misha Rau</span></a>
+  <ul><li><a href="#work">Projects</a></li><li><a href="#artwork">Artwork</a></li><li><a href="#research">Research</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
 </div></nav>
 
 <div class="wrap" id="top">
   <header class="hero">
+    <div class="hero-art ink-art" id="heroArt" aria-hidden="true"></div>
     <h1 class="name" id="name" aria-label="Mu Shan Rau"></h1>
     <div class="intro">
       <p><span id="say">Hi, I’m Misha. I turn ideas into products teams can build.</span>
@@ -287,6 +490,12 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
     <button aria-pressed="false" data-f="Research">User research</button>
   </div>
   <ul class="board" id="board"></ul>
+</div></section>
+
+<section id="artwork" data-tint="lavender"><div class="wrap">
+  <h2 class="rv">Artwork</h2>
+  <p class="lead rv">Original characters, ink sketches, digital illustration and stickers. Drawing is where most of my ideas begin.</p>
+  <ul class="artgrid" id="artgrid"></ul>
 </div></section>
 
 
@@ -369,22 +578,27 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 
 <div class="wrap">
   <div class="contact note tape stick" id="contact" style="--c:var(--lemon)">
-    <h2>Have an idea? Let’s build it.</h2>
+    <h2>Have an idea? <em>Let’s build it.</em></h2>
     <a class="mail" href="mailto:mrau12@terpmail.umd.edu">mrau12@terpmail.umd.edu</a>
     <div class="links"><a href="https://www.linkedin.com/in/mu-shan-rau" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mrau12-glitch" target="_blank" rel="noopener">GitHub</a></div>
   </div>
-  <footer>© 2026 Mu Shan Rau</footer>
+  <footer>© 2026 Mu Shan Rau <span class="sig ink-art" aria-hidden="true"></span></footer>
 </div>
 
 <div id="morph" hidden></div>
 <div class="case" id="case" hidden data-lenis-prevent role="dialog" aria-modal="true" aria-label="Project details"></div>
+<div class="lb" id="lb" hidden data-lenis-prevent role="dialog" aria-modal="true" aria-label="Image viewer"><button class="x" aria-label="Close">✕</button><button class="pv" aria-label="Previous image">←</button><img alt=""><p></p><button class="nx" aria-label="Next image">→</button></div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 document.documentElement.classList.add("js");
-const CDN="https://cdn.myportfolio.com/61ac379a-3420-42de-bd57-f637e4de0fad/";
+/* 图片路径：原图在 assets/images/，网页用的压缩版在 assets/thumbs/（.webp） */
+const O=(d,f)=>`assets/images/${d}/${f}`;
+const T=(d,f)=>`assets/thumbs/${d}/${f.replace(/\.\w+$/,".webp")}`;
 
-/* ============ 项目内容：改这里就能更新网站 ============ */
+/* ============ 项目内容：改这里就能更新网站 ============
+   sections 每一项：[标题, 文字, [图片...], 小字备注]
+   图片写文件名就行（在 dir 文件夹里），要标题就写成 ["文件名","标题"] */
 const PROJECTS=[
  {id:"cstar",title:"Cstar Music",short:"Cstar Music",color:"lemon",year:"2026",cats:["Lead","Tech"],
   img:"https://github.com/mrau12-glitch/Cstar_2026technica/raw/main/2026technica_figma_2/public/cstar-logo.png",
@@ -402,54 +616,92 @@ const PROJECTS=[
    ["Challenges","Accessibility went far beyond focusable buttons. We had to make page layout, the current control, shortcuts and recording state all understandable through sound, and handle audio and text-to-speech differences across browsers and deployments."],
    ["What’s next","Test the workflow with blind and low-vision musicians and let their feedback lead, improve spoken navigation, and explore turning Cstar into a plugin for popular music tools."]
   ],links:[["Try the live prototype","https://russet-tusk-13606100.figma.site"],["View code on GitHub","https://github.com/mrau12-glitch/Cstar_2026technica"]]},
- {id:"cn",title:"Career Narrator",short:"Career Narrator",color:"rose",year:"2026",cats:["Lead"],
-  img:CDN+"d4fa717d-2b75-435d-ba6b-f2061a8a51e0_rwc_255x0x1275x997x1275.jpg?h=165dcd46a90770301a877c095b56e1ef",
+ {id:"cn",title:"Career Narrator",short:"Career Narrator",color:"rose",year:"2026",cats:["Lead"],dir:"projects/career-narrator",
   tags:"Team Lead | Program Strategy | Global Team",
   summary:"I led 12 people across 4 countries to design a 3-day program that helps students tell their story for the careers they want.",
   facts:{Role:"Team lead",Team:"12 people, 4 countries",Program:"U21 Micro-internship",Client:"Common Purpose"},
+  embed:"https://www.canva.com/design/DAG_ncfbQGM/8jKTvdYUN9ggx-KyOPnGYA/view?embed",embedTitle:"The pitch",embedBtn:"Load the presentation here",
   sections:[
    ["The brief","Common Purpose asked randomly formed teams to design a 3-day program that prepares students for future success."],
    ["My role","I led a team spread across the UK, India, the Netherlands and the US, from choosing a theme to the final pitch."],
-   ["Key decisions","We grounded the theme in our own college experiences so the program would solve a real need, then planned the activities around it. To keep everyone aligned across time zones, I made sure every meeting had shared notes for teammates who couldn’t attend."],
-   ["Outcome","We delivered a poster, a presentation and a written proposal, and pitched the final program to Common Purpose."]
+   ["Key decisions","We grounded the theme in our own college experiences so the program would solve a real need, then planned the activities around it. To keep everyone aligned across time zones, I made sure every meeting had shared notes for teammates who couldn’t attend.",["02.png"]],
+   ["Outcome","We delivered a poster, a presentation and a written proposal, and pitched the final program to Common Purpose.",[["01-poster-of-the-program.jpg","Poster of the program"]]]
   ],links:[["View presentation","https://www.canva.com/design/DAG_ncfbQGM/8jKTvdYUN9ggx-KyOPnGYA/view"]]},
- {id:"bz",title:"BitazOne",short:"BitazOne",color:"lavender",year:"2025",cats:["Tech","Research"],
-  img:CDN+"1e98ae2e-3967-4d84-b889-38a30696816d_rwc_0x54x500x390x500.png?h=63a450d085d15550ca1d5650b71d0f8b",
+ {id:"bz",title:"BitazOne",short:"BitazOne",color:"lavender",year:"2025",cats:["Tech","Research"],dir:"projects/bitazone",cover:"cover.png",
   stack:["Python","Figma Make"],
   tags:"Product Owner | AI | Python",
   summary:"My own product idea: an AI tool that creates, optimizes and maps dance formations for K-pop and dance cover groups.",
   facts:{Role:"Product owner & developer",Timeline:"Oct 2025 – ongoing",Users:"Dance cover groups",Tech:"Python, Figma Make"},
   sections:[
-   ["The problem","The documentary SEVENTEEN: Our Chapter shows how hard it is to rework formations when members are away. Dance cover groups also spend hours turning practice videos into formation blocks by hand."],
-   ["Research","K-pop dance databases already represent dancers as x and y points, which showed me the problem was technically solvable from a top-down view. I interviewed two members of GGWB, a K-pop dance group at UMD, and learned cover groups rarely design formations from scratch. What they need is a fast way to fix formations that don’t fit their group."],
-   ["Key decisions","I scoped the product around that real need, mapped the user flow before building anything, and named it BitazOne, from the Japanese “bita-zoroi”, meaning perfectly synchronized."],
-   ["Building it","I wrote Python that tracks dancers in a video and generates a top-down video of every formation change, alongside an interactive prototype."],
+   ["The problem","The documentary SEVENTEEN: Our Chapter shows how hard it is to rework formations when members are away. Dance cover groups also spend hours turning practice videos into formation blocks by hand.",["01.png"]],
+   ["Research","K-pop dance databases already represent dancers as x and y points, which showed me the problem was technically solvable from a top-down view. I interviewed two members of GGWB, a K-pop dance group at UMD, and learned cover groups rarely design formations from scratch. What they need is a fast way to fix formations that don’t fit their group.",["02.jpg"]],
+   ["Key decisions","I scoped the product around that real need, mapped the user flow before building anything, and named it BitazOne, from the Japanese “bita-zoroi”, meaning perfectly synchronized. The big round logo stands for being one team; the arrow says every individual still matters.",["03.jpg"]],
+   ["Building it","I wrote Python that tracks dancers in a video and generates a top-down video of every formation change, alongside an interactive prototype.",["04.png","05.png"]],
    ["Next steps","Improve the accuracy of the top-down video, and keep each dancer’s number fixed so the same person is always easy to follow."]
   ],links:[["Open the prototype","https://www.figma.com/make/ZtnEjvFnnHhCgPdMA1VhQi/AI-Dance-Formation-Optimizer?t=sHXvm6Y0pEL9flqD-1"],["View code on GitHub","https://github.com/mrau12-glitch/Aidanceformationoptimizer"]]},
- {id:"ttu",title:"Tech Turn Up Creative Base Station",short:"Tech Turn Up",color:"sky",year:"2026",cats:["Research"],
-  img:CDN+"abfbe097-3438-4393-a95a-6ed6afc79335_rwc_255x0x1277x999x1277.jpg?h=667b5f1179d8cdf59cef3ddf6dd89350",
+ {id:"ttu",title:"Tech Turn Up Creative Base Station",short:"Tech Turn Up",color:"sky",year:"2026",cats:["Research"],dir:"projects/tech-turn-up-creative-base-station",
   stack:["Figma"],
   tags:"User Research | Mobile Product | STEM",
   summary:"A mobile platform that keeps Tech Turn Up students learning and connected after classes end, made in a 48-hour makeathon.",
   facts:{Role:"Team member",Event:"UX Terps × Hack4Impact",Timeline:"48 hours",Scale:"~150 participants"},
+  embed:"https://www.canva.com/design/DAHFVsekIuM/198PdZeUU4vhY6op9vGYXA/view?embed",embedTitle:"The pitch",embedBtn:"Load the presentation here",
   sections:[
-   ["The problem","Once classes end, students lose their community, their identity as creators, and, for those who can’t attend in person, access altogether. Tech Turn Up had no structured online program to keep their momentum."],
-   ["Research","We interviewed facilitators, high school and elementary students, and teachers to find out what the platform needed to do."],
-   ["How we worked","Each teammate sketched their own version, then we merged the strongest ideas into one plan and built the prototype in Figma, checking every planned feature was covered."],
+   ["The problem","Once classes end, students lose their community, their identity as creators, and, for those who can’t attend in person, access altogether. Tech Turn Up had no structured online program to keep their momentum.",["01.jpg"]],
+   ["Research","We interviewed facilitators, high school and elementary students, and teachers to find out what the platform needed to do.",["02.jpg"]],
+   ["How we worked","Each teammate sketched their own version, then we merged the strongest ideas into one plan and built the prototype in Figma, checking every planned feature was covered, then styled it with Tech Turn Up’s own color palette.",["03.jpg","04.jpg"]],
    ["What I’d do next","Add a web version for students with computers, and solve how to embed coding tools, since some popular languages can’t run inside a phone app."]
   ],links:[["View presentation","https://www.canva.com/design/DAHFVsekIuM/198PdZeUU4vhY6op9vGYXA/view"]]}
 ];
 
+/* ============ 作品集：角色、插画、贴纸 ============ */
 const ART=[
- {title:"Mu Yu Chen",color:"lavender",year:"2026",img:CDN+"43ca856a-fe6a-4530-8c98-3c05da62b69c_rwc_0x111x1640x1282x1640.JPG?h=611fc770f418a3ae17c8bd79a046d70c",
-  tags:"Original character",summary:"A human warrior who devotes his life to hunting invading alien monsters.",facts:{},sections:[]},
- {title:"Lan Ying",color:"sky",year:"2026",img:CDN+"637ffb68-8b16-4c32-8ccb-be260a936593_rwc_133x0x2097x1640x2097.JPG?h=acf9748529fc6e9cef6f9b8f994b4c56",
-  tags:"Original character",summary:"A supernatural warrior who devotes his life to hunting invading alien monsters.",facts:{},sections:[]},
- {title:"Mu Li",color:"pistachio",year:"2026",img:CDN+"31da400d-b2f1-46c9-99eb-d6753024424c_rwc_0x299x1080x844x1080.JPG?h=d61ea1bcaf6ad837f1d0c96e171d5605",
-  tags:"Original character",summary:"A puppy-like student training himself to become an alien hunter.",facts:{},sections:[]}
+ {title:"Mu Yu Chen",color:"lavender",year:"2026",dir:"art/mu-yu-chen",
+  tags:"Original character",summary:"A human warrior who devotes his life to hunting invading alien monsters.",
+  facts:{Name:"Mu Yu Chen (穆羽琛)",Age:"24",Height:"173 cm",Occupation:"General",Weapon:"Ziqing Jian (紫青箭)",Personality:"Decisive, quiet",Ability:"Foresee"},
+  sections:[
+   ["Character","Human | Warrior | Alien Hunter | Decisive",["01.jpg","02.jpg"]],
+   ["Color palette","",[["03-mu-yu-chen-s-color-palette.jpg","Mu Yu Chen’s color palette"]]],
+   ["Illustrations","",["04.jpg","05.jpg"]]
+  ]},
+ {title:"Lan Ying",color:"sky",year:"2026",dir:"art/lan-ying",
+  tags:"Original character",summary:"A supernatural warrior who devotes his life to hunting invading alien monsters.",
+  facts:{Name:"Lan Ying (兰颖)",Age:"22",Height:"192 cm / 283 cm",Occupation:"Commander",Weapon:"Cangyan Gen Axe (苍眼艮斧)",Personality:"Gentle, reserved",Ability:"Sun & Moon magic"},
+  embed:"https://www-ccv.adobe.io/v1/player/ccv/3CbgrLszdSC/embed?bgcolor=%23191919&lazyLoading=true&api_key=BehancePro2View",embedTitle:"Drawing process",embedBtn:"Play the drawing process video",
+  sections:[
+   ["Character","Supernatural | Warrior | Alien Hunter | Resilient",["01.jpg","02.jpg"]],
+   ["Color palette","",[["03-lan-ying-s-color-palette.jpg","Lan Ying’s color palette"]]],
+   ["Motif & pattern","The weapon Lan Ying uses is another form of himself, since he is not human. He has two appearances, and in his human form he can wield his weapon. The eye in the middle of the axe is his eye in his other appearance.",["04.jpg"]],
+   ["Illustrations","",["05.png","06.jpg","07.jpg"]]
+  ]},
+ {title:"Mu Li",color:"pistachio",year:"2026",dir:"art/mu-li",
+  tags:"Original character",summary:"A puppy-like student training himself to become an alien hunter.",
+  facts:{Name:"Mu Li (牧璃)",Age:"22",Height:"187 cm",Occupation:"Student",Personality:"Gentle, puppy-like"},
+  sections:[
+   ["Character","Human | Student | Gentle | Puppy-like",["01.jpg","02.jpg"]],
+   ["Color palette","",[["03-mu-li-s-color-palette.jpg","Mu Li’s color palette"]]],
+   ["Illustrations","",["04.png","05.png","06.png"],"This character is still in development."]
+  ]},
+ {title:"Traditional Illustration",color:"peach",year:"2026",dir:"art/traditional-illustration",
+  tags:"Ink sketches",summary:"Traditional illustration is where most of my ideas begin. I use ink sketches to explore shapes, lines and visual storytelling before moving on to digital.",
+  sections:[
+   ["Tattoo design","",[["01-heart.jpg","Heart"],["02-sword.jpg","Sword"],["03-poker-club.jpg","Poker Club"],["04-wisteria.jpg","Wisteria"],["05-snake-moon.jpg","Snake & Moon"],["06-butterfly.jpg","Butterfly"],["07-eye.jpg","Eye"],["08-phoemix.jpg","Phoenix"],["09-clematis-mask.jpg","Clematis & Mask"],["10-flower-breathe.jpg","Flower & Breathe"],["11-angel.jpg","Angel"]]],
+   ["Character sketches","",["12.jpg","13.jpg","14.jpg","15.jpg","16.jpg"]]
+  ]},
+ {title:"Digital Illustration",color:"rose",year:"2026",dir:"art/digital-illustration",
+  tags:"Digital painting",summary:"A collection of digital illustrations exploring color, lighting, composition and visual storytelling.",
+  sections:[
+   ["Gallery","",[["01-crown.jpg","Crown"],["02-snake.jpg","+Snake"],["03-spider.jpg","+Spider"],["04-jellyfish.jpg","Jellyfish"],["05-shiny-jellyfish.jpg","Shiny Jellyfish"],["06-octupus.jpg","Octopus"],["07-bow.jpg","Bow"],["08-character-s-suit.jpg","Character’s Suit"],["09-clothes-design.jpg","Clothes Design"]]]
+  ]},
+ {title:"Sticker Design",color:"lemon",year:"2024",dir:"art/sticker-design",cover:"cover.png",
+  tags:"Character & stickers",summary:"DrippyDrop, a melting-ice character designed as a sticker set for everyday chats.",
+  sections:[
+   ["DrippyDrop","DrippyDrop is a character of melting ice, designed as a sticker theme that works in lots of situations. I drew stickers for “love you”, “Mid-Autumn Festival”, “Awww”, “good night” and “fighting”.",["01.png","02.png","03.png","04.png","05.png"],"The sticker collection is still in development."]
+  ]}
 ];
 
-
+/* 封面：每个文件夹里的 cover.* 和 cover-hover.* */
+PROJECTS.forEach(p=>{p.list=PROJECTS;if(p.dir&&!p.img)p.img=T(p.dir,p.cover||"cover.jpg")});
+ART.forEach(a=>{a.list=ART;a.img=T(a.dir,a.cover||"cover.jpg");a.hover=T(a.dir,(a.cover||"cover.jpg").replace("cover","cover-hover"))});
 
 const $=s=>document.querySelector(s);
 const COLORS=["rose","peach","lemon","pistachio","sky","lavender"];
@@ -491,10 +743,19 @@ PROJECTS.forEach((p,i)=>{
   $("#board").appendChild(li);
 });
 
-/* artwork polaroids */
-ART.forEach(a=>{
+/* artwork：拍立得墙 */
+const AROT=[-1.8,1.4,-1,1.8,-1.4,1.1];
+ART.forEach((a,i)=>{
+  const li=document.createElement("li");li.className="stick";li.style.setProperty("--d",(i%3*.1)+"s");
+  li.innerHTML=`<button class="acard" style="--c:var(--${a.color});--r:${AROT[i%6]}deg" aria-label="View ${a.title}"><i></i>
+    <div class="pic"><img src="${a.img}" alt="" loading="lazy">${a.hover?`<img class="hov" src="${a.hover}" alt="" loading="lazy">`:""}</div>
+    <h3>${a.title}</h3><span>${a.tags}, ${a.year}</span></button>`;
+  const b=li.querySelector("button");a.el=b;b.onclick=()=>openCase(a,b);$("#artgrid").appendChild(li);
+});
+/* about 里的三张小拍立得：直接打开对应角色 */
+ART.slice(0,3).forEach(a=>{
   const b=document.createElement("button");b.setAttribute("aria-label","View "+a.title);
-  b.innerHTML=`<img src="${a.img}" alt="" loading="lazy">`;a.el=b;b.onclick=()=>openCase(a,b);$("#side").appendChild(b);
+  b.innerHTML=`<img src="${a.img}" alt="" loading="lazy">`;b.onclick=()=>openCase(a,b);$("#side").appendChild(b);
 });
 
 /* 音乐小动画 */
@@ -522,19 +783,25 @@ function typeTerm(){
 
 /* ============ 项目详情：便利贴展开成整页 ============ */
 const caseEl=$("#case"),morph=$("#morph"),EASE="cubic-bezier(.75,0,.2,1)";
-const LIST=PROJECTS;let cur=null,origin=null,busy=false;
+let cur=null,openedP=null,origin=null,busy=false;
 const clipOf=r=>`inset(${r.top}px ${innerWidth-r.right}px ${innerHeight-r.bottom}px ${r.left}px round 6px)`;
 const FULL="inset(0px 0px 0px 0px round 0px)";
 
+const shots=(p,imgs)=>{
+  if(!imgs||!imgs.length)return"";
+  const cls=imgs.length>2?" many":imgs.length===2?" two":"";
+  return `<div class="shots${cls}">${imgs.map(x=>{const [f,c=""]=Array.isArray(x)?x:[x];
+    return `<figure><button class="shot" data-full="${O(p.dir,f)}" data-cap="${c}" aria-label="Enlarge ${c||"image"}"><img src="${T(p.dir,f)}" alt="${c||p.title}" loading="lazy"></button>${c?`<figcaption>${c}</figcaption>`:""}</figure>`}).join("")}</div>`;
+};
 function render(p){
-  const idx=LIST.indexOf(p);
+  const LIST=p.list||PROJECTS,idx=LIST.indexOf(p),kind=LIST===ART?"artwork":"projects";
   const facts=Object.entries(p.facts||{}).map(([k,v])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd></div>`).join("");
-  const secs=(p.sections||[]).map(([h,t])=>`<div class="case-sec rv"><h2>${h}</h2><p>${t}</p></div>`).join("");
+  const secs=(p.sections||[]).map(([h,t,imgs,note])=>`<div class="case-sec rv"><h2>${h}</h2><div>${t?`<p>${t}</p>`:""}${shots(p,imgs)}${note?`<p class="note-line">${note}</p>`:""}</div></div>`).join("");
   const links=(p.links||[]).map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}</a>`).join("");
   const nxt=idx>-1?LIST[(idx+1)%LIST.length]:null;
   caseEl.style.setProperty("--c",`var(--${p.color})`);
   caseEl.innerHTML=`
-   <div class="case-bar"><button class="back"><svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19"/></svg>Back to projects</button>
+   <div class="case-bar"><button class="back"><svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19"/></svg>Back to ${kind}</button>
      ${idx>-1?`<span class="count">${idx+1} of ${LIST.length}</span>`:""}</div>
    <header class="case-head"><div class="wrap">
      <div><div class="tags ci" style="--d:.05s">${p.tags}, ${p.year}</div>
@@ -545,14 +812,16 @@ function render(p){
    </div></header>
    <div class="wrap">
      <div class="case-body">${secs}
-       ${p.embed?`<div class="case-sec rv"><h2>Try it</h2><div><div class="embed" data-src="${p.embed}"><button class="load">Load the live prototype here</button></div>
-         <p class="embed-note">Works best in a new tab: <a href="${p.embed}" target="_blank" rel="noopener">open the prototype</a>.</p></div></div>`:""}</div>
+       ${p.embed?`<div class="case-sec rv"><h2>${p.embedTitle||"Try it"}</h2><div><div class="embed" data-src="${p.embed}"><button class="load">${p.embedBtn||"Load the live prototype here"}</button></div>
+         <p class="embed-note">Works best in a new tab: <a href="${p.embed}" target="_blank" rel="noopener">open it in a new tab</a>.</p></div></div>`:""}</div>
      ${links?`<div class="case-links rv">${links}</div>`:""}
-     ${nxt?`<button class="next note tape rv" style="--c:var(--${nxt.color})"><span>Next project</span><strong>${nxt.title}</strong></button>`:`<div style="height:60px"></div>`}
+     ${nxt?`<button class="next note tape rv" style="--c:var(--${nxt.color})"><span>Next ${kind==="artwork"?"piece":"project"}</span><strong>${nxt.title}</strong></button>`:`<div style="height:60px"></div>`}
    </div>`;
   caseEl.querySelector(".back").onclick=closeCase;
   caseEl.querySelectorAll(".embed .load").forEach(b=>b.onclick=()=>{const box=b.parentElement;
-    box.innerHTML=`<iframe src="${box.dataset.src}" title="Live prototype" loading="lazy" allow="autoplay; microphone"></iframe>`});
+    box.innerHTML=`<iframe src="${box.dataset.src}" title="${p.embedTitle||"Live prototype"}" loading="lazy" allow="autoplay; microphone; fullscreen" allowfullscreen></iframe>`});
+  const all=[...caseEl.querySelectorAll(".shot")];
+  all.forEach((b,i)=>b.onclick=()=>openLb(all,i));
   if(nxt)caseEl.querySelector(".next").onclick=()=>swapCase(nxt);
   const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");cio.unobserve(e.target)}}),{root:caseEl,rootMargin:"0px"});
   caseEl.querySelectorAll(".rv").forEach(el=>cio.observe(el));
@@ -563,7 +832,7 @@ function lock(on){
   if(lenis)on?lenis.stop():lenis.start();
 }
 async function openCase(p,el){
-  if(busy)return;busy=true;origin=el;render(p);lock(true);
+  if(busy)return;busy=true;origin=el;openedP=p;render(p);lock(true);
   if(motionOK){
     morph.style.background=`var(--${p.color})`;morph.hidden=false;
     await morph.animate([{clipPath:clipOf(el.getBoundingClientRect())},{clipPath:FULL}],{duration:560,easing:EASE,fill:"forwards"}).finished;
@@ -579,7 +848,7 @@ async function closeCase(){
     await caseEl.animate([{opacity:1},{opacity:0}],{duration:240,fill:"forwards"}).finished;
   }
   caseEl.hidden=true;caseEl.classList.remove("open");caseEl.getAnimations().forEach(a=>a.cancel());
-  const target=(cur&&cur.el)||origin;
+  const target=(cur&&cur!==openedP&&cur.el)||origin;
   if(motionOK){
     await morph.animate([{clipPath:FULL},{clipPath:clipOf(target.getBoundingClientRect())}],{duration:500,easing:EASE,fill:"forwards"}).finished;
     morph.hidden=true;morph.getAnimations().forEach(a=>a.cancel());morph.style.clipPath="";
@@ -597,7 +866,18 @@ async function swapCase(p){
     morph.hidden=true;morph.getAnimations().forEach(a=>a.cancel())}
   busy=false;
 }
-addEventListener("keydown",e=>{if(e.key==="Escape"&&!caseEl.hidden)closeCase()});
+/* ============ lightbox：点图片看原图 ============ */
+const lb=$("#lb"),lbImg=lb.querySelector("img"),lbCap=lb.querySelector("p");let lbSet=[],lbI=0,lbFrom=null;
+function showLb(){const b=lbSet[lbI];lbImg.src=b.dataset.full;lbImg.alt=b.dataset.cap||"";lbCap.textContent=b.dataset.cap||"";
+  lb.querySelector(".pv").hidden=lb.querySelector(".nx").hidden=lbSet.length<2}
+function openLb(set,i){lbSet=set;lbI=i;lbFrom=set[i];showLb();lb.hidden=false;lb.querySelector(".x").focus()}
+function closeLb(){lb.hidden=true;lbImg.removeAttribute("src");if(lbFrom)lbFrom.focus({preventScroll:true})}
+const stepLb=d=>{lbI=(lbI+d+lbSet.length)%lbSet.length;showLb()};
+lb.querySelector(".x").onclick=closeLb;lb.querySelector(".pv").onclick=()=>stepLb(-1);lb.querySelector(".nx").onclick=()=>stepLb(1);
+lb.onclick=e=>{if(e.target===lb)closeLb()};
+addEventListener("keydown",e=>{
+  if(!lb.hidden){if(e.key==="Escape")closeLb();else if(e.key==="ArrowLeft")stepLb(-1);else if(e.key==="ArrowRight")stepLb(1);return}
+  if(e.key==="Escape"&&!caseEl.hidden)closeCase()});
 
 /* filters */
 document.querySelectorAll(".filters button").forEach(btn=>btn.onclick=()=>{
@@ -608,8 +888,8 @@ document.querySelectorAll(".filters button").forEach(btn=>btn.onclick=()=>{
 /* ============ 滚动效果 ============ */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");
   if(e.target.id==="term")typeTerm();io.unobserve(e.target)}}),{rootMargin:"0px"});
-document.querySelectorAll("main .rv, body > section .rv, .wrap .rv, .stick, #eq, #term").forEach(el=>{if(!el.closest("#case"))io.observe(el)});
-setTimeout(()=>document.querySelectorAll(".rv,.stick").forEach(el=>{if(!el.closest("#case")&&el.getBoundingClientRect().top<innerHeight)el.classList.add("in")}),3000);
+document.querySelectorAll("main .rv, body > section .rv, .wrap .rv, .stick, #eq, #term, .ink-art.reveal").forEach(el=>{if(!el.closest("#case"))io.observe(el)});
+setTimeout(()=>document.querySelectorAll(".rv,.stick,.ink-art.reveal").forEach(el=>{if(!el.closest("#case")&&el.getBoundingClientRect().top<innerHeight)el.classList.add("in")}),3000);
 
 const tio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.documentElement.style.setProperty("--tint",e.target.dataset.tint?`var(--${e.target.dataset.tint})`:"var(--bg)")}),{rootMargin:"-45% 0px -45% 0px"});
 document.querySelectorAll("[data-tint],.hero").forEach(s=>tio.observe(s));
@@ -621,6 +901,7 @@ function onScroll(){
   document.documentElement.style.setProperty("--p",max>0?y/max:0);
   if(motionOK){
     $("#name").style.setProperty("--s",Math.min(y,700));
+    $("#heroArt").style.setProperty("--hs",Math.min(y,900));
     const band=$("#band");band.style.setProperty("--m",(y*.45)%(band.scrollWidth/3));
     const tl=$("#tl").getBoundingClientRect();
     $("#tl").style.setProperty("--tp",Math.max(0,Math.min(1,(innerHeight*.75-tl.top)/tl.height)));
