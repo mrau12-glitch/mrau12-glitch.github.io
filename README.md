@@ -18,4 +18,7 @@ Live site: https://mrau12-glitch.github.io
 
 ## 网站内容在哪里改
 
-打开 `index.html`，搜索 `const PROJECTS=[`，每个项目的标题、简介、段落和链接都在那里。
+打开 `index.html`，搜索 `const PROJECTS=[`（项目）或 `const ART=[`（作品），每一项的标题、简介、段落、图片和链接都在那里。
+
+- 图片原图在 `assets/images/<分类>/<作品>/`，点开大图时显示的就是原图。
+- 网页上直接显示的是压缩版 `assets/thumbs/…/*.webp`（最长边 1200px）。新加图片后，也要放一份压缩版进去。
