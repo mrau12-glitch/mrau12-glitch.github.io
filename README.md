@@ -22,3 +22,7 @@ Live site: https://mrau12-glitch.github.io
 
 - 图片原图在 `assets/images/<分类>/<作品>/`，点开大图时显示的就是原图。
 - 网页上直接显示的是压缩版 `assets/thumbs/…/*.webp`（最长边 1200px）。新加图片后，也要放一份压缩版进去。
+
+## 水墨主题预览（`ink.html`）
+
+`ink.html` 是用 Misha 自己的线稿做的水墨主题预览，内容和 `index.html` 一样。线稿是从照片转出来的矢量图，放在 `assets/ink/`（`misha.svg` 是签名）。确定要用的话，把 `ink.html` 改名成 `index.html` 就行。
