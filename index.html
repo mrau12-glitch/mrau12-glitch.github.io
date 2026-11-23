@@ -6,7 +6,7 @@
 <title>Mu Shan (Misha) Rau — Product & Project Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 /* ============ 配色：改这里就能换整站颜色 ============ */
 :root{
@@ -287,182 +287,18 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   .case-bar{padding:12px 16px}
 }
 @media (max-width:520px){.artgrid{grid-template-columns:1fr}.shots.two{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.flow .note{font-size:23px;padding:8px 12px 10px}.flow svg{width:34px}.eq span{width:8px}}
-
-/* =====================================================================
-   INK THEME：米白纸 + 黑墨线，装饰全部来自 Misha 自己的线稿（assets/ink/）
-   ===================================================================== */
-:root{
-  --paper:#F4F1EA; --paper2:#EAE5DB; --ink:#161412; --ink-soft:#5F5A53; --accent:#A40000;
-  --line:rgba(22,20,18,.16);
-  --rose:var(--paper2);--peach:var(--paper2);--lemon:var(--paper2);--pistachio:var(--paper2);--sky:var(--paper2);--lavender:var(--paper2);
-  --bg:var(--paper);--surface:var(--paper);--note-ink:var(--ink);--dot:transparent;--shadow:none;
-  --display:"Fraunces","Noto Serif SC",Georgia,serif;
-  --hand:"Fraunces","Noto Serif SC",Georgia,serif;
-  --hatch:repeating-linear-gradient(-45deg,var(--ink) 0 1px,transparent 1px 7px);
-  --star:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#151413;--paper2:#1F1D1A;--ink:#EDE7DB;--ink-soft:#A8A196;--accent:#E3554C;--line:rgba(237,231,219,.18);color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#151413;--paper2:#1F1D1A;--ink:#EDE7DB;--ink-soft:#A8A196;--accent:#E3554C;--line:rgba(237,231,219,.18);color-scheme:dark}
-
-body{background-color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px}
-:focus-visible{outline-color:var(--accent)}
-.hand,.flow .note,.skill h3,.vig .cap,.eq b,.count,.case-sec h2,.next span,.acard h3,.shots figcaption,.lb p,.pcard .more{font-style:italic}
-
-/* 墨线稿：用 mask 上色，深色模式自动变白墨 */
-.ink-art{background:var(--ink);-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat;aspect-ratio:var(--ar)}
-.ink-art.reveal{clip-path:inset(0 0 100% 0)}
-.ink-art.reveal.in{clip-path:inset(0 0 0 0);transition:clip-path 2.2s cubic-bezier(.55,0,.25,1) var(--d,0s)}
-@media (prefers-reduced-motion:reduce){.ink-art.reveal{clip-path:none}}
-
-/* 签名 logo */
-.logo{display:inline-flex;align-items:center}
-.logo .sig{display:block;height:46px;width:61px;--src:url(assets/ink/misha.svg);--ar:357/271}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-nav{background:color-mix(in srgb,var(--paper) 80%,transparent)}
-nav .wrap{padding-top:10px;padding-bottom:8px}
-nav ul a{font-weight:500;color:var(--ink-soft);position:relative}
-nav ul a:hover{color:var(--ink)}
-nav ul a:hover::before{content:"";position:absolute;left:-14px;top:50%;width:9px;height:9px;margin-top:-4.5px;background:var(--accent);clip-path:var(--star)}
-
-/* 墨线进度：宽屏是左边一条往下长的墨线，窄屏是顶部细线 */
-.progress{height:2px;background:var(--ink)}
-.tip{display:none}
-@media (min-width:1300px){
-  .progress{top:0;bottom:0;left:30px;right:auto;width:1.5px;height:auto;transform-origin:top;transform:scaleY(var(--p,0))}
-  .tip{display:block;position:fixed;left:23px;top:calc(var(--p,0)*(100vh - 22px) + 3px);width:16px;height:16px;z-index:51;background:var(--ink);clip-path:var(--star)}
-}
-
-/* hero */
-.hero{position:relative}
-.hero-art{position:absolute;right:-70px;top:4vh;height:84vh;max-height:760px;--src:url(assets/ink/butterfly.svg);--ar:817/1932;pointer-events:none;transform-origin:18% 100%;translate:0 calc(var(--hs,0)*.22px)}
-.name{font:600 clamp(54px,9.2vw,132px)/.95 var(--display);letter-spacing:-.035em;gap:.06em .3em;max-width:9.5em;position:relative}
-.tile{background:none;box-shadow:none;rotate:0deg;min-width:0;padding:0;color:var(--ink)}
-.tile:hover{rotate:0deg;translate:0 -6%;color:var(--accent)}
-.name .w:last-child .tile{font-style:italic;font-weight:400}
-.intro{position:relative}
-.intro p{font:400 clamp(22px,2.5vw,30px)/1.3 var(--display)}
-.flow .note{background:none;border:1.5px solid var(--ink);border-radius:999px;font:italic 400 24px/1 var(--display);padding:9px 18px 11px}
-.flow svg{stroke-width:1.6}
-
-/* band */
-.band{background:none;border-block:1.5px solid var(--ink)}
-.band span{font:italic 400 clamp(34px,5.6vw,68px)/1 var(--display);letter-spacing:-.02em}
-.band i{width:.34em;height:.34em;border-radius:0;rotate:0deg;background:var(--accent);clip-path:var(--star)}
-
-/* 标题：墨笔划 + 一滴墨 */
-section h2{position:relative;font-weight:600;letter-spacing:-.03em}
-section > .wrap > h2::after,#about h2::after{content:"";display:block;width:120px;height:26px;margin-top:10px;background:var(--ink);
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 26'%3E%3Cpath d='M2 6 C 30 2, 60 9, 92 4 S 116 5 118 6' stroke='black' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M86 6 C 86 12, 83 15, 83 18 a3 3 0 0 0 6 0 C 89 15, 86 12, 86 6Z'/%3E%3C/svg%3E") left/contain no-repeat;
-  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 26'%3E%3Cpath d='M2 6 C 30 2, 60 9, 92 4 S 116 5 118 6' stroke='black' stroke-width='3.2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M86 6 C 86 12, 83 15, 83 18 a3 3 0 0 0 6 0 C 89 15, 86 12, 86 6Z'/%3E%3C/svg%3E") left/contain no-repeat}
-.lead{color:var(--ink-soft)}
-.filters button{border:1.5px solid var(--ink);background:none}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-
-/* 卡片：细墨框，悬停出现排线 */
-.note{background:var(--paper);border:1.5px solid var(--ink);border-radius:2px;box-shadow:none}
-.tape::before{display:none}
-.pcard{padding:14px 14px 24px;transition:rotate .35s ease,translate .35s cubic-bezier(.3,1.5,.5,1),box-shadow .35s}
-.pcard:hover,.pcard:focus-visible{translate:-4px -4px;box-shadow:6px 6px 0 var(--ink)}
-.pcard .pic{border-radius:0;background:var(--paper2);position:relative}
-.pcard .pic::after{content:"";position:absolute;inset:0;background:var(--hatch);opacity:0;transition:opacity .35s;mix-blend-mode:multiply}
-.pcard:hover .pic::after{opacity:.12}
-.pcard .tags,.paper .venue,.case-head .tags,.acard span{font:600 12.5px var(--body);letter-spacing:.12em;text-transform:uppercase;opacity:1;color:var(--ink-soft)}
-.pcard h3{font-weight:600}
-.pcard .more{font:italic 400 19px var(--display)}
-.pcard .more::after{content:" →"}
-.chips span{background:none;border:1px solid var(--ink);color:var(--ink)}
-
-/* artwork */
-#artwork .wrap{position:relative}
-.acard{background:var(--paper);border:1.5px solid var(--ink);box-shadow:none;color:var(--ink);padding:12px 12px 16px;transition:rotate .35s ease,translate .35s cubic-bezier(.3,1.5,.5,1),box-shadow .35s}
-.acard:hover,.acard:focus-visible{translate:-4px -4px;box-shadow:6px 6px 0 var(--ink)}
-.acard i{display:none}
-.acard h3{font:italic 400 27px/1.1 var(--display);margin:14px 2px 4px}
-.acard span{margin:0 2px}
-
-/* research / about */
-.paper{padding:30px 32px}
-.paper h3{font-weight:600}
-.now{border:1.5px dashed var(--ink-soft);background:none;border-radius:2px}
-.about{position:relative}
-.skill h3{font:italic 600 24px/1 var(--display)}
-.side-row button{background:var(--paper);border:1.5px solid var(--ink);box-shadow:none}
-
-/* 小动画区 */
-.vig .cap{font:italic 400 clamp(26px,3vw,34px)/1.2 var(--display)}
-.doodle path{stroke-width:2.6}
-.doodle .bulb{fill:var(--paper2)}
-.doodle .rays{stroke:var(--accent);stroke-width:3.5}
-.eq span{background:var(--ink)}
-.eq b{font:italic 400 30px var(--display)}
-.term{background:var(--paper2)}
-.term .dots i{background:var(--ink-soft)}
-.term .ok{color:var(--accent)}
-
-/* 时间轴：串珠点线 + 四角星 */
-.tl::before{width:4px;left:-.5px;border-radius:0;background:radial-gradient(circle,var(--ink) 1.6px,transparent 2.1px) center top/4px 11px repeat-y}
-.tl li::before{left:-8px;top:5px;width:20px;height:20px;border-radius:0;rotate:0deg;background:var(--ink);clip-path:var(--star)}
-.tl li:first-child::before{background:var(--accent)}
-.tl h3{font-weight:600}
-
-/* contact */
-.contact{position:relative;overflow:visible;padding:90px 28px}
-.contact h2{font-weight:600}
-.contact h2 em{font-weight:400}
-.contact a.mail{font:italic 400 clamp(19px,2.8vw,30px) var(--display);text-decoration-thickness:1.5px}
-footer .sig{display:inline-block;width:72px;height:55px;--src:url(assets/ink/misha.svg);--ar:357/271;vertical-align:middle;margin-left:6px}
-
-/* 项目详情页 */
-.case{background-color:var(--paper);background-image:none}
-.case-head{background:var(--paper2);border-bottom:1.5px solid var(--ink);color:var(--ink)}
-.case-head h1{font-weight:600;letter-spacing:-.03em}
-.fact{background:none;border:1px solid var(--ink);box-shadow:none;border-radius:2px}
-.polaroid{background:var(--paper);border:1.5px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:10px}
-.case-sec{border-top:1.5px dashed var(--line)}
-.case-sec h2{font:italic 400 clamp(28px,3vw,38px)/1.1 var(--display)}
-.case-sec h2::before{content:"";display:inline-block;width:13px;height:13px;margin-right:10px;background:var(--accent);clip-path:var(--star);vertical-align:.25em}
-.case-links a,.back{background:var(--ink);color:var(--paper)}
-.count{font:italic 400 20px var(--display);background:var(--paper)}
-.shots figure{background:var(--paper);border:1px solid var(--line);box-shadow:none;padding:6px 6px 8px}
-.shots figcaption{font:italic 400 18px/1.2 var(--display);color:var(--ink)}
-.shots:not(.two):not(.many) img{background:var(--paper)}
-.next{border:1.5px solid var(--ink)}
-.next:hover{translate:-4px -4px;box-shadow:6px 6px 0 var(--ink)}
-.next span{font:italic 400 20px var(--display)}
-.next strong{font-weight:600}
-.embed{background:var(--paper2);border:1.5px solid var(--ink);box-shadow:none;border-radius:2px}
-.lb{background:rgba(12,11,10,.94)}
-
-@media (prefers-reduced-motion:no-preference){
-  /* 首页线稿：先像墨水一样往下流出来，然后轻轻摆动；滚动时有一点视差 */
-  .hero-art{animation:inkdown 2.6s cubic-bezier(.55,0,.25,1) .5s both,sway 7s ease-in-out 3.1s infinite alternate}
-  @keyframes inkdown{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
-  @keyframes sway{from{rotate:-1.6deg}to{rotate:1.8deg}}
-  /* 标题下的墨笔划：跟着标题一起"写"出来 */
-  .js section h2::after{clip-path:inset(0 100% 0 0);transition:clip-path .9s cubic-bezier(.6,0,.2,1) .35s}
-  .js .in h2::after,.js h2.in::after{clip-path:inset(0 0 0 0)}
-}
-.hero{overflow-x:clip}
-@media (max-width:520px){.flow .note{font-size:18px;padding:7px 11px 9px}.flow svg{width:26px}}
-@media (max-width:860px){
-  .hero-art{height:52vh;right:-40px;top:auto;bottom:4vh;opacity:.22}
-  .logo .sig{height:40px;width:53px}
-}
 </style>
 </head>
 <body>
-<div class="progress" aria-hidden="true"></div><div class="tip" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
 
 <nav><div class="wrap">
-  <a class="logo" href="#top" aria-label="Misha Rau, back to top"><span class="sig ink-art" aria-hidden="true"></span><span class="sr">Misha Rau</span></a>
+  <a class="logo" href="#top">Misha Rau</a>
   <ul><li><a href="#work">Projects</a></li><li><a href="#artwork">Artwork</a></li><li><a href="#research">Research</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
 </div></nav>
 
 <div class="wrap" id="top">
   <header class="hero">
-    <div class="hero-art ink-art" id="heroArt" aria-hidden="true"></div>
     <h1 class="name" id="name" aria-label="Mu Shan Rau"></h1>
     <div class="intro">
       <p><span id="say">Hi, I’m Misha. I turn ideas into products teams can build.</span>
@@ -578,11 +414,11 @@ footer .sig{display:inline-block;width:72px;height:55px;--src:url(assets/ink/mis
 
 <div class="wrap">
   <div class="contact note tape stick" id="contact" style="--c:var(--lemon)">
-    <h2>Have an idea? <em>Let’s build it.</em></h2>
+    <h2>Have an idea? Let’s build it.</h2>
     <a class="mail" href="mailto:mrau12@terpmail.umd.edu">mrau12@terpmail.umd.edu</a>
     <div class="links"><a href="https://www.linkedin.com/in/mu-shan-rau" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mrau12-glitch" target="_blank" rel="noopener">GitHub</a></div>
   </div>
-  <footer>© 2026 Mu Shan Rau <span class="sig ink-art" aria-hidden="true"></span></footer>
+  <footer>© 2026 Mu Shan Rau</footer>
 </div>
 
 <div id="morph" hidden></div>
@@ -888,8 +724,8 @@ document.querySelectorAll(".filters button").forEach(btn=>btn.onclick=()=>{
 /* ============ 滚动效果 ============ */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");
   if(e.target.id==="term")typeTerm();io.unobserve(e.target)}}),{rootMargin:"0px"});
-document.querySelectorAll("main .rv, body > section .rv, .wrap .rv, .stick, #eq, #term, .ink-art.reveal").forEach(el=>{if(!el.closest("#case"))io.observe(el)});
-setTimeout(()=>document.querySelectorAll(".rv,.stick,.ink-art.reveal").forEach(el=>{if(!el.closest("#case")&&el.getBoundingClientRect().top<innerHeight)el.classList.add("in")}),3000);
+document.querySelectorAll("main .rv, body > section .rv, .wrap .rv, .stick, #eq, #term").forEach(el=>{if(!el.closest("#case"))io.observe(el)});
+setTimeout(()=>document.querySelectorAll(".rv,.stick").forEach(el=>{if(!el.closest("#case")&&el.getBoundingClientRect().top<innerHeight)el.classList.add("in")}),3000);
 
 const tio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.documentElement.style.setProperty("--tint",e.target.dataset.tint?`var(--${e.target.dataset.tint})`:"var(--bg)")}),{rootMargin:"-45% 0px -45% 0px"});
 document.querySelectorAll("[data-tint],.hero").forEach(s=>tio.observe(s));
@@ -901,7 +737,6 @@ function onScroll(){
   document.documentElement.style.setProperty("--p",max>0?y/max:0);
   if(motionOK){
     $("#name").style.setProperty("--s",Math.min(y,700));
-    $("#heroArt").style.setProperty("--hs",Math.min(y,900));
     const band=$("#band");band.style.setProperty("--m",(y*.45)%(band.scrollWidth/3));
     const tl=$("#tl").getBoundingClientRect();
     $("#tl").style.setProperty("--tp",Math.max(0,Math.min(1,(innerHeight*.75-tl.top)/tl.height)));
